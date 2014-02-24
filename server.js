@@ -8,7 +8,7 @@ app.engine('html', cons.underscore);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use('/static', express.static('static'));
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
 
 

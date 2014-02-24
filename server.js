@@ -94,18 +94,11 @@ app.get('/', function(req, res){
 });
 
 app.get('/filter/location', function(req, res) {
-    var locQuery = req.param('location');
-
-    res.render('page', {
-        title: 'Admin Home',
-        locations: renderLocation(locQuery),
-        completionStates: renderCompletionStates('Reported'),
-        results: subRenderer.render('results.html', {
-            results: []
-        })
-    });
+    var locQuery = req.param('q');
+    res.send(renderLocation(locQuery));
 });
 
 app.get('/filter/state', function(req, res) {
-
+    var stateQuery = req.param('q');
+    res.send(renderCompletionStates(stateQuery));
 });

@@ -1,11 +1,11 @@
 <nav>
-    <% if (!fullExpand) { locs = locs.slice(0, defaultShow); } %>
-
-    <% _.each(locs, function(loc) { %>
-    <span class="purple-link<% if (selectedLocation.name === loc.name) { %> selected<% } %>"><%= loc.name %></span>
+    <% _.each(locs, function(loc, i) { %>
+    <span class="purple-link<% if (selectedLocation.name === loc.name) { %> selected<% } %><% if (i >= defaultShow) { %> extra-loc<% } %>">
+        <%= loc.name %>
+    </span>
     <% }); %>
 
     <% if (!fullExpand && locs.length >= defaultShow) { %>
-    <span class="purple-link">>></span>
+    <span class="purple-link show-all">>></span>
     <% } %>
 </nav>

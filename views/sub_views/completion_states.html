@@ -1,0 +1,5 @@
+<nav>
+<% _.each(states, function(state) { %>
+    <a href="#" class="state-btn<% if (selectedState.name === state.name) { %> selected<% } %>"><%= state.name %></a>
+<% }); %>
+</nav>

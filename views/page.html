@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link href='http://fonts.googleapis.com/css?family=Fenix|Audiowide' rel='stylesheet' type='text/css'>
+    <link href='http://weloveiconfonts.com/api/?family=iconicstroke' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet/less" type="text/css" href="/static/less/page.less" />
+
+    <script type="text/javascript" src="/static/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/less-1.6.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/base.js"></script>
+</head>
+<body>
+    <h1>Admin Console</h1>
+    <div class="container">
+        <!-- Locations go here -->
+        <div class="locations-container">
+            <%= locations %>
+        </div>
+
+        <!-- Completion states go here -->
+        <div class="states-container">
+            <div class="states-header">
+                <%= completionStates %>
+            </div>
+            <div class="results">
+                <%= results %>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

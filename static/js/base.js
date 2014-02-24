@@ -3,7 +3,7 @@ var base = {
     statesCont: '.states-header',
     messagesCont: '.messages-container ul',
 
-    baseUrl: '127.0.0.1',
+    baseUrl: 'http://backstep-admin.herokuapp.com',
     locFilterUrl: '/filter/location',
     stateFilterUrl: '/filter/state',
 

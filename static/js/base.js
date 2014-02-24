@@ -32,7 +32,7 @@ var base = {
     _socketResponseBinding: function() {
         var _this = this;
         this.socket.bindMessage('statusResponse', function(status) {
-            var tpl = _.template("<li><span class='iconic bolt'></span><%= content %></li>"),
+            var tpl = _.template("<li><span class='iconic bolt'></span><%= content %><span class='iconic x'></span></li>"),
                 compiled = tpl(status);
             $(_this.messagesCont).append(compiled);
         });
@@ -74,6 +74,11 @@ var base = {
             filterResult.done(function(resp) {
                 $(_this.statesCont).html(resp);
             });
+        });
+
+        /**-- Messages click bindings --**/
+        $(this.messagesCont).on('click', '.x', function() {
+            $(this).closest('li').fadeOut();
         })
     }
 };

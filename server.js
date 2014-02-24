@@ -83,7 +83,7 @@ var renderCompletionStates = function(stateName) {
             }
         ]
     });
-}
+};
 
 
 
@@ -118,6 +118,8 @@ app.get('/filter/state', function(req, res) {
 io.sockets.on('connection', function (socket) {
     socket.on('statusRequest', function(data) {
         var tests = ['This might be a lost item', 'Refund requested', 'Cab reported item', 'Las Vegas taxi reported lost item', 'New York Great Cabs reported lost item'];
-        socket.emit('statusResponse', { content: _.sample(tests) });
+        socket.emit('statusResponse', {
+            content: _.sample(tests)
+        });
     });
 });

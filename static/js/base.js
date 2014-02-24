@@ -45,7 +45,7 @@ var base = {
         /* websocket bindings */
         /* simulation only */
         for (var i = 0, len = 5 ; i < len ; i++) {
-            setTimeout(function() { _this._pollServer.apply(_this, []); }, _.random(i*1000, i*10000));
+            setTimeout(function() { _this._pollServer.apply(_this, []); }, _.random(i*1000, i*6000));
         }
 
         this._socketResponseBinding();

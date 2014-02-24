@@ -2,6 +2,8 @@ var express = require('express'),
     cons = require('consolidate'),
     _ = require('underscore'),
     request = require('request');
+    EventEmitter = require('events').EventEmitter,
+    util = require('util'),
     subRenderer = require('./renderer.js'),
     api = require('./api_urls.js');
 
@@ -119,20 +121,40 @@ app.get('/filter/state', function(req, res) {
 
 
 /*****-----< Socket.io >-----*****/
-io.sockets.on('connection', function (socket) {
-    socket.on('newItemsRequest', function(data) {
+(function() {
+    /* this function checks our remote BackStep api for any new items and emits the event through the given socket */
+    var pollApi = function(socket) {
         request(api.items, function (error, response, items) {
-            socket.emit('newItemsResponse', {
+            console.log(items);
+            socket.emit('newItems', {
                 items: items
             });
 
             /* for each item, make a PUT request to the api to update its admin_seen field */
-            items = JSON.parse(items);
-            _.each(items, function(item) {
-                request.put(api.items+item.id+"/admin_seen/", {
-                    admin_seen: 1
-                });
-            });
+//            items = JSON.parse(items);
+//            _.each(items, function(item) {
+//                request.put(api.items+item.id+"/admin_seen/", {
+//                    admin_seen: 1
+//                });
+//            });
         });
+    };
+
+    /* borrowed from http://stackoverflow.com/questions/16500514/node-js-recursive-settimeout-inside-of-a-psuedoclass */
+    var Ticker = function(time) {
+        var self = this;
+        this.time = time;
+        setInterval(function() {
+            self.emit('tick');
+        }, self.time);
+    };
+    util.inherits(Ticker, EventEmitter);
+    var ticker = new Ticker(4000);
+
+    /* whenever a new 'tick' occurs, poll the api and emit the socket event */
+    io.sockets.on('connection', function (socket) {
+        ticker.on('tick', function() {
+            pollApi(socket);
+        })
     });
-});
+}());

@@ -23,30 +23,30 @@ var base = {
     },
 
     /*
-    check if we have any new messages on the server
+    setup the socket bindings (for responses)
      */
-    _pollServer: function() {
-        this.socket.sendMessage('newItemsRequest', {});
+    _socketResponseBinding: function(resp) {
+        var _this = this;
+        var allCompiled = '',
+            items = $.parseJSON(resp.items);
+
+        _.each(items, function(item) {
+            var tpl = _.template(_this.messageTpl),
+                compiled = tpl(item);
+
+            allCompiled += compiled;
+        });
+
+        $(_this.messagesCont).append(allCompiled);
     },
 
     /*
-    setup the socket bindings (for responses)
+    bind to the emitting sockets from the server
      */
-    _socketResponseBinding: function() {
+    _socketBinding: function() {
         var _this = this;
-
-        this.socket.bindMessage('newItemsResponse', function(resp) {
-            var allCompiled = '',
-                items = $.parseJSON(resp.items);
-
-            _.each(items, function(item) {
-                var tpl = _.template(_this.messageTpl),
-                    compiled = tpl(item);
-
-                allCompiled += compiled;
-            });
-
-            $(_this.messagesCont).append(allCompiled);
+        this.socket.bindMessage('newItems', function(resp) {
+            _this._socketResponseBinding.call(_this, resp);
         });
     },
 
@@ -55,10 +55,7 @@ var base = {
         this.clickBindings();
 
         /* websocket bindings */
-        (function pollServer() {
-            setTimeout(function() { _this._pollServer.apply(_this, []); pollServer(); }, 10000);
-        }());
-        this._socketResponseBinding();
+        this._socketBinding();
     },
 
     clickBindings: function() {

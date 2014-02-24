@@ -3,7 +3,7 @@ var express = require('express'),
     _ = require('underscore'),
     request = require('request');
     subRenderer = require('./renderer.js'),
-    api = require('./api_urls');
+    api = require('./api_urls.js');
 
 /* create the server and its connections */
 var app = express(),

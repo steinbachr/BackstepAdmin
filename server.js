@@ -1,14 +1,22 @@
 var express = require('express'),
     cons = require('consolidate'),
+    _ = require('underscore'),
     subRenderer = require('./renderer.js');
-var app = express();
+
+var app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server);
+
+
+
+
 
 /*****-----< App Configurations >-----*****/
 app.engine('html', cons.underscore);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use('/static', express.static('static'));
-app.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000);
 
 
 
@@ -101,4 +109,15 @@ app.get('/filter/location', function(req, res) {
 app.get('/filter/state', function(req, res) {
     var stateQuery = req.param('q');
     res.send(renderCompletionStates(stateQuery));
+});
+
+
+
+
+/*****-----< Socket.io >-----*****/
+io.sockets.on('connection', function (socket) {
+    socket.on('statusRequest', function(data) {
+        var tests = ['This might be a lost item', 'Refund requested', 'Cab reported item', 'Las Vegas taxi reported lost item', 'New York Great Cabs reported lost item'];
+        socket.emit('statusResponse', { content: _.sample(tests) });
+    });
 });

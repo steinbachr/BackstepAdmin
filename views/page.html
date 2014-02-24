@@ -3,11 +3,14 @@
 <head>
     <title><%= title %></title>
     <link href='http://fonts.googleapis.com/css?family=Fenix|Audiowide' rel='stylesheet' type='text/css'>
-    <link href='http://weloveiconfonts.com/api/?family=iconicstroke' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/static/fonts/iconic/font/iconic%20fill/iconic_fill.css" media="screen" />
     <link rel="stylesheet/less" type="text/css" href="/static/less/page.less" />
 
-    <script type="text/javascript" src="/static/js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="/static/js/less-1.6.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/less-1.6.3.min.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/static/js/socket.js"></script>
     <script type="text/javascript" src="/static/js/base.js"></script>
 </head>
 <body>
@@ -26,6 +29,13 @@
             <div class="results">
                 <%= results %>
             </div>
+        </div>
+
+        <!-- Messages received from web sockets will go here -->
+        <div class="messages-container">
+            <h3>Messages</h3>
+            <ul>
+            </ul>
         </div>
     </div>
 </body>

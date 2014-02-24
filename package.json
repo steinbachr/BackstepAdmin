@@ -1,14 +1,15 @@
 {
-  "name": "BackstepAdmin",
-  "description": "Admin for the Backstep application",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "express": "3.x",
-    "consolidate": "0.10.0",
-    "underscore": "1.6.0"
-  },
-  "engines": {
-    "node": "0.10.x"
-  }
+    "name": "BackstepAdmin",
+    "description": "Admin for the Backstep application",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "3.x",
+        "consolidate": "0.10.0",
+        "underscore": "1.6.0",
+        "socket.io": "0.9.x"
+    },
+    "engines": {
+        "node": "0.10.x"
+    }
 }

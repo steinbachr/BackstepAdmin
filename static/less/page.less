@@ -1,10 +1,10 @@
 /*****----- Icon Fonts -----*****/
-/* iconicstroke */
-[class*="iconicstroke-"]:before {
-  font-family: 'IconicStroke', sans-serif;
-}
+
+
 
 /*****-----< Colors >-----*****/
+@light-gray: #eee;
+@gray: #999999;
 @dark-gray: #454647;
 @darker-gray: #2a2c2d;
 @purple-link: #91abd6;
@@ -29,14 +29,14 @@
 
 body { background:@dark-gray; .fenix_family;
     h1 { .audiowide_family; .gigantic_font; text-align:center; color:@purple-white; }
-    .container { padding-left:50px;
+    .container { padding-left:50px; margin-top:80px;
         .locations-container {
             span.purple-link { color:@purple-link; margin-right:10px; .smaller_font; cursor:pointer;
                 &.selected { font-weight:bold;  .larger_font; }
                 &.extra-loc { display:none; }
             }
         }
-        .states-container { border:solid 1px @yellow; width:80%; margin:50px auto;
+        .states-container { border:solid 1px @yellow; width:90%; margin:50px auto;
             .states-header { background:@darker-gray; text-align:center;
                 nav { border-bottom:solid 1px; display:table; width:100%;
                     a.state-btn { padding:15px 15px; text-decoration:none; color:@green; .medium_font; display:table-cell;
@@ -47,6 +47,15 @@ body { background:@dark-gray; .fenix_family;
             }
             .results { padding-left:15px;
                 h3 { color:@purple-white; }
+            }
+        }
+
+        .messages-container { border:solid 1px @royal-purple; width:70%; margin:auto;
+            h3 { background:@darker-gray; text-align:center; color:@green; margin:0; padding:20px; }
+            ul { list-style-type:none; padding:0px; margin:0px; height:200px; overflow:scroll;
+                li { background:@light-gray; padding:15px; border-bottom:solid 2px @gray; color:@royal-purple; font-weight:bold; .medium_font;
+                    span { .medium_font; margin-right:10px; }
+                }
             }
         }
     }

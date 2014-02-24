@@ -2,6 +2,9 @@ var base = {
     locationsCont: '.locations-container',
     statesCont: '.states-header',
     messagesCont: '.messages-container ul',
+    messageTpl: "<li><span class='iconic bolt'></span>" +
+        "A <%= color %> <%= type %> lost. Identifying Characteristics: <%= identifying_characteristics %>" +
+        "<span class='iconic x'></span></li>",
 
     baseUrl: 'http://backstep-admin.herokuapp.com',
     locFilterUrl: '/filter/location',
@@ -23,7 +26,7 @@ var base = {
     check if we have any new messages on the server
      */
     _pollServer: function() {
-        this.socket.sendMessage('statusRequest', {});
+        this.socket.sendMessage('newItemsRequest', {});
     },
 
     /*
@@ -31,10 +34,19 @@ var base = {
      */
     _socketResponseBinding: function() {
         var _this = this;
-        this.socket.bindMessage('statusResponse', function(status) {
-            var tpl = _.template("<li><span class='iconic bolt'></span><%= content %><span class='iconic x'></span></li>"),
-                compiled = tpl(status);
-            $(_this.messagesCont).append(compiled);
+
+        this.socket.bindMessage('newItemsResponse', function(resp) {
+            var allCompiled = '',
+                items = $.parseJSON(resp.items);
+
+            _.each(items, function(item) {
+                var tpl = _.template(_this.messageTpl),
+                    compiled = tpl(item);
+
+                allCompiled += compiled;
+            });
+
+            $(_this.messagesCont).append(allCompiled);
         });
     },
 
@@ -43,11 +55,9 @@ var base = {
         this.clickBindings();
 
         /* websocket bindings */
-        /* simulation only */
-        for (var i = 0, len = 5 ; i < len ; i++) {
-            setTimeout(function() { _this._pollServer.apply(_this, []); }, _.random(i*1000, i*6000));
-        }
-
+        (function pollServer() {
+            setTimeout(function() { _this._pollServer.apply(_this, []); pollServer(); }, 10000);
+        }());
         this._socketResponseBinding();
     },
 

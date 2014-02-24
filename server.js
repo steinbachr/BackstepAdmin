@@ -1,10 +1,14 @@
 var express = require('express'),
     cons = require('consolidate'),
     _ = require('underscore'),
-    subRenderer = require('./renderer.js');
+    request = require('request');
+    subRenderer = require('./renderer.js'),
+    api = require('./api_urls');
 
+/* create the server and its connections */
 var app = express(),
-    server = require('http').createServer(app),
+    http = require('http'),
+    server = http.createServer(app),
     io = require('socket.io').listen(server);
 
 
@@ -116,10 +120,19 @@ app.get('/filter/state', function(req, res) {
 
 /*****-----< Socket.io >-----*****/
 io.sockets.on('connection', function (socket) {
-    socket.on('statusRequest', function(data) {
-        var tests = ['This might be a lost item', 'Refund requested', 'Cab reported item', 'Las Vegas taxi reported lost item', 'New York Great Cabs reported lost item'];
-        socket.emit('statusResponse', {
-            content: _.sample(tests)
+    socket.on('newItemsRequest', function(data) {
+        request(api.items, function (error, response, items) {
+            socket.emit('newItemsResponse', {
+                items: items
+            });
+
+            /* for each item, make a PUT request to the api to update its admin_seen field */
+            items = JSON.parse(items);
+            _.each(items, function(item) {
+                request.put(api.items+item.id+"/admin_seen/", {
+                    admin_seen: 1
+                });
+            });
         });
     });
 });

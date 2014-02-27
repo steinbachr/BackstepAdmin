@@ -8,7 +8,7 @@
         "consolidate": "0.10.0",
         "underscore": "1.6.0",
         "socket.io": "0.9.x",
-        "request": "2.33.x"
+        "restler": "3.2.x"
     },
     "engines": {
         "node": "0.10.x"

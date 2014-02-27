@@ -1,7 +1,7 @@
 var express = require('express'),
     cons = require('consolidate'),
     _ = require('underscore'),
-    request = require('request');
+    rest = require('restler');
     EventEmitter = require('events').EventEmitter,
     util = require('util'),
     subRenderer = require('./renderer.js'),
@@ -124,19 +124,17 @@ app.get('/filter/state', function(req, res) {
 (function() {
     /* this function checks our remote BackStep api for any new items and emits the event through the given socket */
     var pollApi = function(socket) {
-        request(api.items, function (error, response, items) {
-            console.log(items);
+        rest.get(api.includeFilter(api.items, api.availableFilters.unseenItems), {}).on('complete', function (data, response) {
             socket.emit('newItems', {
-                items: items
+                items: JSON.stringify(data)
             });
 
             /* for each item, make a PUT request to the api to update its admin_seen field */
-//            items = JSON.parse(items);
-//            _.each(items, function(item) {
-//                request.put(api.items+item.id+"/admin_seen/", {
-//                    admin_seen: 1
-//                });
-//            });
+            _.each(data, function(item) {
+                rest.putJson(api.items+item.id+"/", {
+                    admin_seen: 1
+                });
+            });
         });
     };
 

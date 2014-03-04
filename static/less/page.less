@@ -24,10 +24,10 @@
 
 /*****-----< Font Familys >-----*****/
 .audiowide_family {  font-family: 'Audiowide', cursive; }
-.fenix_family { font-family: 'Fenix', serif; }
+.alegraya_family(@font-weight:400) { font-family: 'Alegreya Sans SC', sans-serif; font-weight:@font-weight !important; }
 
 
-body { background:@dark-gray; .fenix_family;
+body { background:@dark-gray; .alegraya_family();
     h1 { .audiowide_family; .gigantic_font; text-align:center; color:@purple-white; }
     .container { padding-left:50px; margin-top:80px;
         .locations-container {
@@ -45,8 +45,9 @@ body { background:@dark-gray; .fenix_family;
                     }
                 }
             }
-            .results { padding-left:15px;
+            .results {
                 h3 { color:@purple-white; }
+                div { border-bottom:solid 2px white; color:@purple-white; padding:15px; }
             }
         }
 

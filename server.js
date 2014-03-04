@@ -6,6 +6,7 @@ var express = require('express'),
     util = require('util'),
     subRenderer = require('./renderer.js'),
     api = require('./api_urls.js');
+    constants = require('./constants.js');
 
 /* create the server and its connections */
 var app = express(),
@@ -62,35 +63,22 @@ like renderLocation, but for completion state
  */
 var renderCompletionStates = function(stateName) {
     return subRenderer.render('completion_states.html', {
-        selectedState: {
+        selectedStatus: {
             name: stateName
         },
-        states: [
-            {
-                name: 'Reported'
-            },
-            {
-                name: 'Sourcing'
-            },
-            {
-                name: 'Match Found'
-            },
-            {
-                name: 'Match Approved'
-            },
-            {
-                name: 'Delivered'
-            },
-            {
-                name: 'Refund Almost Required'
-            },
-            {
-                name: 'Refund Required'
-            }
-        ]
+        statuses: constants.statuses
     });
 };
 
+/*
+render the results of a filter operation
+@param results - the results to render
+ */
+var renderResults = function(results) {
+    return subRenderer.render('results.html', {
+        results: results
+    });
+};
 
 
 
@@ -101,9 +89,7 @@ app.get('/', function(req, res){
         title: 'Admin Home',
         locations: renderLocation('Las Vegas'),
         completionStates: renderCompletionStates('Reported'),
-        results: subRenderer.render('results.html', {
-            results: []
-        })
+        results: renderResults([])
     });
 });
 
@@ -112,9 +98,18 @@ app.get('/filter/location', function(req, res) {
     res.send(renderLocation(locQuery));
 });
 
-app.get('/filter/state', function(req, res) {
-    var stateQuery = req.param('q');
-    res.send(renderCompletionStates(stateQuery));
+app.get('/filter/status', function(req, res) {
+    var statusVal = req.param('q');
+
+    /* send a request to the API for all items having the specified status */
+    var statusKey = _.find(constants.statuses, function(statusObj) { return statusObj.name === statusVal; }).key;
+    rest.get(api.includeFilter(api.items, api.availableFilters.status, statusKey), {}).on('complete', function(data, response) {
+        console.log("filtered by status = " + statusKey + " and got "+ data);
+        res.send(JSON.stringify({
+            statusBar: renderCompletionStates(statusVal),
+            results: renderResults(data)
+        }));
+    });
 });
 
 
@@ -124,7 +119,8 @@ app.get('/filter/state', function(req, res) {
 (function() {
     /* this function checks our remote BackStep api for any new items and emits the event through the given socket */
     var pollApi = function(socket) {
-        rest.get(api.includeFilter(api.items, api.availableFilters.unseenItems), {}).on('complete', function (data, response) {
+        rest.get(api.includeFilter(api.items, api.availableFilters.unseenItems, undefined), {}).on('complete', function (data, response) {
+            console.log("data is "+data);
             socket.emit('newItems', {
                 items: JSON.stringify(data)
             });

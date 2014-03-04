@@ -1,6 +1,7 @@
 var base = {
     locationsCont: '.locations-container',
     statesCont: '.states-header',
+    resultsCont: '.results',
     messagesCont: '.messages-container ul',
     messageTpl: "<li><span class='iconic bolt'></span>" +
         "A <%= color %> <%= type %> lost. Identifying Characteristics: <%= identifying_characteristics %>" +
@@ -8,7 +9,7 @@ var base = {
 
     baseUrl: 'http://backstep-admin.herokuapp.com',
     locFilterUrl: '/filter/location',
-    stateFilterUrl: '/filter/state',
+    statusFilterUrl: '/filter/status',
 
     socket: mySocket.init(this.baseUrl),
 
@@ -77,9 +78,12 @@ var base = {
         /**-- State bar click bindings --**/
         $(this.statesCont).on('click', '.state-btn', function() {
             var stateQuery = $(this).text();
-            var filterResult = _this._filterResults(_this.stateFilterUrl, stateQuery);
+            var filterResult = _this._filterResults(_this.statusFilterUrl, stateQuery);
             filterResult.done(function(resp) {
-                $(_this.statesCont).html(resp);
+                var parsed = $.parseJSON(resp);
+
+                $(_this.statesCont).html(parsed.statusBar);
+                $(_this.resultsCont).html(parsed.results);
             });
         });
 

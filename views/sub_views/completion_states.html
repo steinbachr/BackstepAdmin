@@ -1,5 +1,5 @@
 <nav>
-<% _.each(statuses, function(status) { %>
-    <a href="#" class="state-btn<% if (selectedStatus.name === status.name) { %> selected<% } %>"><%= status.name %></a>
+<% _.each(statuses, function(status, i) { %>
+    <a data-key="<%= status.key %>" href="#" class="state-btn<% if (selectedStatus.name === status.name) { %> selected<% } %>"><%= status.name %>(<%= counts[i] %>)</a>
 <% }); %>
 </nav>

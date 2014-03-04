@@ -58,15 +58,17 @@ var renderLocation = function(locName) {
 
 /*
 like renderLocation, but for completion state
-@param stateName - the selected completion state (name)
+@param selectedStatus - the selected completion status (name)
+@param statusCounts - an array which matches up one-to-one with constants.statuses and contains the num of items for each status
 @return the rendered completion_states.html file
  */
-var renderCompletionStates = function(stateName) {
+var renderCompletionStates = function(selectedStatus, statusCounts) {
     return subRenderer.render('completion_states.html', {
         selectedStatus: {
-            name: stateName
+            name: selectedStatus
         },
-        statuses: constants.statuses
+        statuses: constants.statuses,
+        counts: statusCounts
     });
 };
 
@@ -85,30 +87,22 @@ var renderResults = function(results) {
 
 /*****-----< Routes >-----*****/
 app.get('/', function(req, res){
-    res.render('page', {
-        title: 'Admin Home',
-        locations: renderLocation('Las Vegas'),
-        completionStates: renderCompletionStates('Reported'),
-        results: renderResults([])
-    });
-});
+    rest.get(api.items, {}).on('complete', function(data, response) {
+        console.log("getting all items");
 
-app.get('/filter/location', function(req, res) {
-    var locQuery = req.param('q');
-    res.send(renderLocation(locQuery));
-});
+        /* bucket the items in the response by their status and get the counts for each bucket */
+        var statusCounts = constants.statuses.map(function(status) {
+            return data.filter(function(item) {
+                return item.status === status.key
+            }).length;
+        });
 
-app.get('/filter/status', function(req, res) {
-    var statusVal = req.param('q');
-
-    /* send a request to the API for all items having the specified status */
-    var statusKey = _.find(constants.statuses, function(statusObj) { return statusObj.name === statusVal; }).key;
-    rest.get(api.includeFilter(api.items, api.availableFilters.status, statusKey), {}).on('complete', function(data, response) {
-        console.log("filtered by status = " + statusKey + " and got "+ data);
-        res.send(JSON.stringify({
-            statusBar: renderCompletionStates(statusVal),
+        res.render('page', {
+            title: 'Admin Home',
+            locations: renderLocation('Las Vegas'),
+            completionStates: renderCompletionStates('Reported', statusCounts),
             results: renderResults(data)
-        }));
+        });
     });
 });
 

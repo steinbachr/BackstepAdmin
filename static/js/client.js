@@ -8,19 +8,15 @@ var base = {
         "<span class='iconic x'></span></li>",
 
     baseUrl: 'http://backstep-admin.herokuapp.com',
-    locFilterUrl: '/filter/location',
-    statusFilterUrl: '/filter/status',
-
     socket: mySocket.init(this.baseUrl),
 
     /*
     filter the results of the page
-     @param filterUrl - the url to make the GET request to
      @param filterVal - the value to use for filtering
-     @return jQuery deferred containing filter result
     */
-    _filterResults: function(filterUrl, filterVal) {
-        return $.get(filterUrl, {q: filterVal.trim()});
+    _filterResults: function(filterVal) {
+        $(this.resultsCont).children().hide();
+        $(this.resultsCont).find("div[data-status='"+filterVal+"']").show();
     },
 
     /*
@@ -77,14 +73,11 @@ var base = {
 
         /**-- State bar click bindings --**/
         $(this.statesCont).on('click', '.state-btn', function() {
-            var stateQuery = $(this).text();
-            var filterResult = _this._filterResults(_this.statusFilterUrl, stateQuery);
-            filterResult.done(function(resp) {
-                var parsed = $.parseJSON(resp);
+            var statusQuery = $(this).data('key');
+            _this._filterResults(statusQuery);
 
-                $(_this.statesCont).html(parsed.statusBar);
-                $(_this.resultsCont).html(parsed.results);
-            });
+            $(this).siblings().removeClass('selected');
+            $(this).addClass('selected');
         });
 
         /**-- Messages click bindings --**/

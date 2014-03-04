@@ -51,11 +51,11 @@ var base = {
     },
 
     init: function() {
-        var _this = this;
         this.clickBindings();
-
         /* websocket bindings */
         this._socketBinding();
+        
+        this._filterResults(0);
     },
 
     clickBindings: function() {

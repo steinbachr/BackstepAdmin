@@ -12,7 +12,7 @@ var express = require('express'),
 var app = express(),
     http = require('http'),
     server = http.createServer(app),
-    io = require('socket.io').listen(server);
+    socket = require('socket.io').listen(server);
 
 
 
@@ -138,7 +138,5 @@ app.get('/', function(req, res){
         }, 10000);
     };
 
-     io.sockets.on('connection', function (socket) {
-        startPolling(socket)
-    });
+    startPolling(socket);
 }());

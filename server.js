@@ -138,7 +138,7 @@ app.get('/', function(req, res){
         }, self.time);
     };
     util.inherits(Ticker, EventEmitter);
-    var ticker = new Ticker(4000);
+    var ticker = new Ticker(10000);
 
     /* whenever a new 'tick' occurs, poll the api and emit the socket event */
     io.sockets.on('connection', function (socket) {

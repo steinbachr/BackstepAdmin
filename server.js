@@ -113,15 +113,17 @@ app.get('/', function(req, res){
 /*****-----< Socket.io >-----*****/
 (function() {
     /* this function checks our remote BackStep api for any new items and emits the event through the given socket */
-    var pollApi = function(socket) {
+    var pollApi = function(client) {
         rest.get(api.includeFilter(api.items, api.availableFilters.unseenItems, undefined), {}).on('complete', function (data, response) {
             console.log("data is "+data);
-            socket.emit('newItems', {
+
+            client.emit('newItems', {
                 items: JSON.stringify(data)
             });
 
+
             /* only after we've received a response, should we try and poll again */
-            startPolling(socket);
+            startPolling(client);
 
             /* for each item, make a PUT request to the api to update its admin_seen field */
 //            _.each(data, function(item) {
@@ -132,11 +134,13 @@ app.get('/', function(req, res){
         });
     };
 
-    var startPolling = function(socket) {
+    var startPolling = function(client) {
         setTimeout(function() {
-	        pollApi(socket);
+	        pollApi(client);
         }, 10000);
     };
 
-    startPolling(socket);
+    socket.on('connection', function(client) {
+        pollApi(client);
+    });
 }());

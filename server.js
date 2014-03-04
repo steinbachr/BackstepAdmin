@@ -99,6 +99,7 @@ app.get('/', function(req, res){
 
         res.render('page', {
             title: 'Admin Home',
+            itemsCount: data.length,
             locations: renderLocation('Las Vegas'),
             completionStates: renderCompletionStates('Reported', statusCounts),
             results: renderResults(data)

@@ -1,4 +1,5 @@
 var base = {
+    counterCont: '.counter',
     locationsCont: '.locations-container',
     statesCont: '.states-header',
     resultsCont: '.results',
@@ -34,6 +35,8 @@ var base = {
             allCompiled += compiled;
         });
 
+        var prevCount = parseInt($(_this.counterCont).find('.total-items').text());
+        $(_this.counterCont).find('.total-items').text(prevCount + items.length);
         $(_this.messagesCont).append(allCompiled);
     },
 

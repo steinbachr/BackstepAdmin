@@ -29,7 +29,10 @@
 
 body { background:@dark-gray; .alegraya_family();
     h1 { .audiowide_family; .gigantic_font; text-align:center; color:@purple-white; }
-    .container { padding-left:50px; margin-top:80px;
+    .counter { position:absolute; top:0; right:20px; color:@purple-white;
+        span { font-size:30px; }
+    }
+    .container { padding-left:50px; margin-top:30px;
         .locations-container {
             span.purple-link { color:@purple-link; margin-right:10px; .smaller_font; cursor:pointer;
                 &.selected { font-weight:bold;  .larger_font; }
@@ -45,7 +48,7 @@ body { background:@dark-gray; .alegraya_family();
                     }
                 }
             }
-            .results {
+            .results { height:300px; overflow:scroll;
                 h3 { color:@purple-white; }
                 div { border-bottom:solid 2px white; color:@purple-white; padding:15px; }
             }

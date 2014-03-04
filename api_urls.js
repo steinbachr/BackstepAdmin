@@ -1,5 +1,5 @@
 module.exports = {
-    items: "http://127.0.0.1:8000/api/items/",
+    items: "http://www.back-step.com/api/items/",
 
     availableFilters: {
         unseenItems: "unseen",

@@ -120,6 +120,9 @@ app.get('/', function(req, res){
                 items: JSON.stringify(data)
             });
 
+            /* only after we've received a response, should we try and poll again */
+            startPolling(socket);
+
             /* for each item, make a PUT request to the api to update its admin_seen field */
 //            _.each(data, function(item) {
 //                rest.putJson(api.items+item.id+"/", {
@@ -129,21 +132,13 @@ app.get('/', function(req, res){
         });
     };
 
-    /* borrowed from http://stackoverflow.com/questions/16500514/node-js-recursive-settimeout-inside-of-a-psuedoclass */
-    var Ticker = function(time) {
-        var self = this;
-        this.time = time;
-        setInterval(function() {
-            self.emit('tick');
-        }, self.time);
+    var startPolling = function(socket) {
+        setTimeout(function() {
+	        pollApi(socket);
+        }, 10000);
     };
-    util.inherits(Ticker, EventEmitter);
-    var ticker = new Ticker(10000);
 
-    /* whenever a new 'tick' occurs, poll the api and emit the socket event */
-    io.sockets.on('connection', function (socket) {
-        ticker.on('tick', function() {
-            pollApi(socket);
-        })
+     io.sockets.on('connection', function (socket) {
+        startPolling(socket)
     });
 }());

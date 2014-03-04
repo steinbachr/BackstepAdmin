@@ -23,19 +23,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="client.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="client.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="8" selection-start="1781" selection-end="1781" vertical-scroll-proportion="0.8064516" vertical-offset="315" max-vertical-offset="1515">
+            <state line="45" column="32" selection-start="1488" selection-end="1488" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="1515">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="server.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="36" selection-start="2774" selection-end="2774" vertical-scroll-proportion="0.0" vertical-offset="1057" max-vertical-offset="2325">
+            <state line="117" column="10" selection-start="3342" selection-end="3342" vertical-scroll-proportion="0.4122257" vertical-offset="1492" max-vertical-offset="2325">
               <folding />
             </state>
           </provider>
@@ -101,10 +101,10 @@
         <option value="$PROJECT_DIR$/api_urls.js" />
         <option value="$PROJECT_DIR$/views/sub_views/results.html" />
         <option value="$PROJECT_DIR$/views/sub_views/completion_states.html" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/static/less/page.less" />
         <option value="$PROJECT_DIR$/views/page.html" />
         <option value="$PROJECT_DIR$/static/js/client.js" />
+        <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
   </component>
@@ -596,16 +596,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
+    <entry file="file://$PROJECT_DIR$/static/js/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="36" selection-start="2774" selection-end="2774" vertical-scroll-proportion="0.0" vertical-offset="1057" max-vertical-offset="2325">
+        <state line="45" column="32" selection-start="1488" selection-end="1488" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="1515">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/client.js">
+    <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="8" selection-start="1781" selection-end="1781" vertical-scroll-proportion="0.8064516" vertical-offset="315" max-vertical-offset="1515">
+        <state line="117" column="10" selection-start="3342" selection-end="3342" vertical-scroll-proportion="0.4122257" vertical-offset="1492" max-vertical-offset="2325">
           <folding />
         </state>
       </provider>

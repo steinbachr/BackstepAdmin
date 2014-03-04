@@ -88,7 +88,7 @@ var renderResults = function(results) {
 /*****-----< Routes >-----*****/
 app.get('/', function(req, res){
     rest.get(api.items, {}).on('complete', function(data, response) {
-        console.log("getting all items");
+        console.log("got " + data.length + " items");
 
         /* bucket the items in the response by their status and get the counts for each bucket */
         var statusCounts = constants.statuses.map(function(status) {
@@ -121,11 +121,11 @@ app.get('/', function(req, res){
             });
 
             /* for each item, make a PUT request to the api to update its admin_seen field */
-            _.each(data, function(item) {
-                rest.putJson(api.items+item.id+"/", {
-                    admin_seen: 1
-                });
-            });
+//            _.each(data, function(item) {
+//                rest.putJson(api.items+item.id+"/", {
+//                    admin_seen: 1
+//                });
+//            });
         });
     };
 

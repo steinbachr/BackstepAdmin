@@ -54,7 +54,7 @@ var base = {
         this.clickBindings();
         /* websocket bindings */
         this._socketBinding();
-        
+
         this._filterResults(0);
     },
 

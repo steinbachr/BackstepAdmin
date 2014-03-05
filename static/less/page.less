@@ -16,6 +16,9 @@
 @green: #88cea0;
 
 
+
+
+
 /*****-----< Font Sizes >-----*****/
 .gigantic_font { font-size:50px; }
 .larger_font { font-size:26px; }
@@ -23,15 +26,30 @@
 .smaller_font { font-size:16px; }
 .small_font { font-size:12px; }
 
+
+
+
+
 /*****-----< Font Familys >-----*****/
 .audiowide_family {  font-family: 'Audiowide', cursive; }
 .alegraya_family(@font-weight:400) { font-family: 'Alegreya Sans SC', sans-serif; font-weight:@font-weight !important; }
 
 
+
+
+
+/*****-----< General >-----*****/
+.ui-draggable-dragging { background:@vibrant-purple; color:white; width:30%; }
+
+
+
+
+
 body { background:@dark-gray; .alegraya_family();
     h1 { .audiowide_family; .gigantic_font; text-align:center; color:@purple-white; }
-    .counter { position:absolute; top:0; right:20px; color:@purple-white;
+    .counter, .refresh { position:absolute; top:0; right:20px; color:@purple-white;
         span { font-size:30px; }
+        &.refresh { left:20px; top:20px; cursor:pointer; }
     }
     .container { padding-left:50px; margin-top:30px;
         .locations-container {

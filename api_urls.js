@@ -13,6 +13,14 @@ module.exports = {
         }
     },
 
+    actions: {
+        sendItemEmail: (function() {
+            var subject = encodeURIComponent("You Have A New Status Update for Your Lost Item!");
+            return '/send_item_email/?email=item_status_change&' + subject;
+        }())
+    },
+
+
     /**
      *
      * @param endpoint - the base api endpoint to query

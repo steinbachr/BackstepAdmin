@@ -1,5 +1,6 @@
 var base = {
     counterCont: '.counter',
+    refreshCont: '.refresh',
     locationsCont: '.locations-container',
     statesCont: '.states-header',
     resultsCont: '.results',
@@ -65,10 +66,44 @@ var base = {
         });
     },
 
+    /*
+    setup draggable / droppable bindings
+     */
+    _dragDropBinding: function() {
+        var _this = this;
+
+        $(this.resultsCont).find('.result').draggable({
+            appendTo: 'body',
+            helper: "clone"
+        });
+
+        $(this.statesCont).find('a').each(function() {
+            $(this).droppable({
+                hoverClass: "selected",
+                tolerance: "pointer",
+                drop: function(event, ui) {
+                    var $item = ui.draggable,
+                        $statusTarget = $(event.target),
+                        statusKey = $statusTarget.data('key');
+
+                    /* persist the change */
+                    $.post(urls.items + $item.data('id') + "/status/", {status: statusKey});
+
+                    /* show the change on the frontend */
+                    var oldCount = parseInt($statusTarget.find('.count').text());
+                    $statusTarget.find('.count').text(oldCount + 1);
+                    $item.attr('data-status', statusKey);
+                    _this._filterResults(undefined);
+
+                }
+            });
+        });
+    },
+
     init: function() {
         this.clickBindings();
-        /* websocket bindings */
         this._socketBinding();
+        this._dragDropBinding();
 
         this.addedFilters.status = 0;
         this._filterResults(undefined);
@@ -76,6 +111,10 @@ var base = {
 
     clickBindings: function() {
         var _this = this;
+
+        $(this.refreshCont).on('click', function() {
+            window.location = window.location;
+        });
 
         /**-- Locations bar click bindings --**/
         $(this.locationsCont).on('click', '.purple-link', function() {

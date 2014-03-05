@@ -21,6 +21,8 @@ app.engine('html', cons.underscore);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use('/static', express.static('static'));
+app.use(express.json())
+app.use(express.bodyParser());
 server.listen(process.env.PORT || 3000);
 
 
@@ -125,6 +127,18 @@ app.post('/items/:id/seen/', function(req, res) {
     /* when an item in new messages is marked for removal, this method is called which issues a put request to mark the item as seen */
     rest.putJson(api.items+id+"/", {
         admin_seen: 1
+    });
+
+    res.send();
+});
+
+app.post('/items/:id/status/', function(req, res) {
+    var id = req.params.id,
+        newStatus = req.body.status;
+
+    /* when an item in new messages is marked for removal, this method is called which issues a put request to mark the item as seen */
+    rest.putJson(api.items+id+"/", {
+        status: newStatus
     });
 
     res.send();

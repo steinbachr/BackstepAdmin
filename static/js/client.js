@@ -5,7 +5,7 @@ var base = {
     resultsCont: '.results',
     popupCont: '.popup',
     messagesCont: '.messages-container ul',
-    messageTpl: "<li><span class='iconic bolt'></span>" +
+    messageTpl: "<li data-id='<%= id %>'><span class='iconic bolt'></span>" +
         "A <%= color %> <%= type %> lost. Identifying Characteristics: <%= identifying_characteristics %>" +
         "<span class='iconic x'></span></li>",
     socket: mySocket.init(urls.baseUrl),
@@ -36,7 +36,7 @@ var base = {
 
         var prevCount = parseInt($(_this.counterCont).find('.total-items').text());
         $(_this.counterCont).find('.total-items').text(prevCount + items.length);
-        $(_this.messagesCont).append(allCompiled);
+        $(_this.messagesCont).html(allCompiled);
     },
 
     /*
@@ -84,7 +84,10 @@ var base = {
 
         /**-- Messages click bindings --**/
         $(this.messagesCont).on('click', '.x', function() {
-            $(this).closest('li').fadeOut();
+            var $message = $(this).closest('li'),
+                itemId = $message.data('id');
+            $.post(urls.items+itemId+"/seen/");
+            $message.fadeOut();
         });
 
         /**-- Results Click Bindings --**/

@@ -124,6 +124,16 @@ app.get('/items/:id/', function(req, res){
     });
 });
 
+app.post('/items/:id/seen/', function(req, res) {
+    var id = req.params.id;
+    console.log('issuing put request for admin seen');
+    /* when an item in new messages is marked for removal, this method is called which issues a put request to mark the item as seen */
+    rest.putJson(api.items+id+"/", {
+        admin_seen: 1
+    });
+
+    res.send();
+});
 
 
 
@@ -144,13 +154,6 @@ app.get('/items/:id/', function(req, res){
 
             /* only after we've received a response, should we try and poll again */
             startPolling(client);
-
-            /* for each item, make a PUT request to the api to update its admin_seen field */
-//            _.each(data, function(item) {
-//                rest.putJson(api.items+item.id+"/", {
-//                    admin_seen: 1
-//                });
-//            });
         });
     };
 

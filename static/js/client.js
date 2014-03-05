@@ -34,8 +34,8 @@ var base = {
             allCompiled += compiled;
         });
 
-        var prevCount = parseInt($(_this.counterCont).find('.total-items').text());
-        $(_this.counterCont).find('.total-items').text(prevCount + items.length);
+//        var prevCount = parseInt($(_this.counterCont).find('.total-items').text());
+//        $(_this.counterCont).find('.total-items').text(prevCount + items.length);
         $(_this.messagesCont).html(allCompiled);
     },
 

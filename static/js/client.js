@@ -95,11 +95,16 @@ var base = {
             var resultId = $(this).data('id'),
                 $details = $(_this.popupCont);
 
+            $('body').css('overflow', 'hidden');
             $.get(urls.items + resultId + "/").success(function(rendered) {
                 $details.html(rendered);
 
                 $(document).on('click', function(evt) {
-                    $(evt.target).closest('.popup').length < 1 && $details.is(':visible') && $details.fadeOut();
+                    if ($(evt.target).closest('.popup').length < 1 && $details.is(':visible')) {
+                        $details.fadeOut();
+                        $('body').css('overflow', 'scroll');
+                    }
+
                 });
 
                 $details.fadeIn();

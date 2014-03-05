@@ -77,9 +77,11 @@ body { background:@dark-gray; .alegraya_family();
             }
         }
     }
-    .popup { display:none; margin:auto; position:absolute; top:0; left:0; bottom:0; right:0; width:70%; height:800px; background:white;
-        .item-details { color:black; border-top:solid 2px @gray; cursor:auto; padding:70px 30px;
-            h3 { .audiowide_family; color:@darker-gray; margin-top:50px; border-bottom:solid 2px @vibrant-purple;}
+    .popup { display:none; margin:auto; position:absolute; top:0; left:0; bottom:0; right:0; width:50%; height:400px; background:white; overflow-y:scroll; overflow-x:hidden;
+        .item-details { color:black; border-top:solid 2px @gray; cursor:auto; padding:10px 5px; border:solid 2px black;
+            h3 { .audiowide_family; color:@darker-gray; margin-top:50px; border-bottom:solid 2px @vibrant-purple;
+                &:first-child { margin-top:10px; }
+            }
             .info-row { display:table; width:70%; white-space:nowrap}
             .info-cell { display:table-cell; padding:10px 50px; }
             ul { list-style-type:none; padding-left:0; }

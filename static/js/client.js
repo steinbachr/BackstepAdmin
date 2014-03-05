@@ -3,20 +3,19 @@ var base = {
     locationsCont: '.locations-container',
     statesCont: '.states-header',
     resultsCont: '.results',
+    popupCont: '.popup',
     messagesCont: '.messages-container ul',
     messageTpl: "<li><span class='iconic bolt'></span>" +
         "A <%= color %> <%= type %> lost. Identifying Characteristics: <%= identifying_characteristics %>" +
         "<span class='iconic x'></span></li>",
-
-    baseUrl: 'http://backstep-admin.herokuapp.com',
-    socket: mySocket.init(this.baseUrl),
+    socket: mySocket.init(urls.baseUrl),
 
     /*
     filter the results of the page
      @param filterVal - the value to use for filtering
     */
     _filterResults: function(filterVal) {
-        $(this.resultsCont).children().hide();
+        $(this.resultsCont).find('.result').hide();
         $(this.resultsCont).find("div[data-status='"+filterVal+"']").show();
     },
 
@@ -86,7 +85,26 @@ var base = {
         /**-- Messages click bindings --**/
         $(this.messagesCont).on('click', '.x', function() {
             $(this).closest('li').fadeOut();
-        })
+        });
+
+        /**-- Results Click Bindings --**/
+        $(this.resultsCont).on('click', 'div', function() {
+            var resultId = $(this).data('id'),
+                $details = $(_this.popupCont);
+
+            $.get(urls.items + resultId + "/").success(function(rendered) {
+                $details.html(rendered);
+
+                $(document).on('click', function(evt) {
+                    $(evt.target).closest('.popup').length < 1 && $details.is(':visible') && $details.fadeOut();
+                });
+
+                $details.fadeIn();
+            });
+
+            $(this).siblings().removeClass('selected');
+            $(this).addClass('selected');
+        });
     }
 };
 

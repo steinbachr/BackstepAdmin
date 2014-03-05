@@ -2,8 +2,6 @@ var express = require('express'),
     cons = require('consolidate'),
     _ = require('underscore'),
     rest = require('restler');
-    EventEmitter = require('events').EventEmitter,
-    util = require('util'),
     subRenderer = require('./renderer.js'),
     api = require('./api_urls.js');
     constants = require('./constants.js');
@@ -107,6 +105,25 @@ app.get('/', function(req, res){
     });
 });
 
+app.get('/items/:id/', function(req, res){
+    var id = req.params.id;
+    rest.get(api.items + id + "/", {}).on('complete', function(item, response) {
+        var city = encodeURIComponent(item.city);
+
+        /* now get all companies near the item's city */
+        var filterObj = {};
+        filterObj[api.filters.companies.city] = city;
+        rest.get(api.includeFilters(api.companies, filterObj), {}).on('complete', function(companies, response) {
+            console.log("fetched companies were " + companies);
+            res.send(subRenderer.render('item_details.html', {
+                item: item,
+                messages: item.item_messages,
+                companies: companies
+            }));
+        });
+    });
+});
+
 
 
 
@@ -114,7 +131,10 @@ app.get('/', function(req, res){
 (function() {
     /* this function checks our remote BackStep api for any new items and emits the event through the given socket */
     var pollApi = function(client) {
-        rest.get(api.includeFilter(api.items, api.availableFilters.unseenItems, undefined), {}).on('complete', function (data, response) {
+        var filterObj = {};
+        filterObj[api.filters.items.adminSeen] = 'False';
+
+        rest.get(api.includeFilters(api.items, filterObj), {}).on('complete', function (data, response) {
             console.log("data is "+data);
 
             client.emit('newItems', {

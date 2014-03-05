@@ -1,27 +1,35 @@
 module.exports = {
     items: "http://www.back-step.com/api/items/",
+    companies: "http://www.back-step.com/api/companies/",
 
-    availableFilters: {
-        unseenItems: "unseen",
-        status: "status"
+    filters: {
+        items: {
+            adminSeen: "admin_seen",
+            status: "status",
+            city: "city"
+        },
+        companies: {
+            city: "city"
+        }
     },
 
     /**
      *
      * @param endpoint - the base api endpoint to query
-     * @param filterName - the name of the filter
-     * @param filterVal (optional) - if included, use this as the value of the filter. Else just use 1.
+     * @param filters - object having keys of filter names and values of filter values
      * @returns the fully qualified url to query
      */
-    includeFilter: function(endpoint, filterName, filterVal) {
-        filterVal = filterVal !== undefined ? filterVal : 1;
-
+    includeFilters: function(endpoint, filters) {
         /* insert a ? if not already inserted */
         if (endpoint.indexOf('?') < 0) {
             endpoint += "?";
         }
 
-        endpoint += filterName + "=" + filterVal + "&";
+        var queryString = Object.keys(filters).reduce(function(prev, cur) {
+            return prev + cur + "=" + filters[cur] + "&";
+        }, "");
+
+        endpoint += queryString;
         console.log("getting url "+endpoint);
 
         return endpoint;

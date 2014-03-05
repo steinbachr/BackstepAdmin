@@ -1,7 +1,22 @@
 <% if (results.length === 0) { %>
     <h3>No results with this filter</h3>
 <% } else { %>
-    <% _.each(results, function(res) { %>
-    <div data-status="<%= res.status %>" data-id="<%= res.id %>" class="result" style="display:none;"><%= res.description %> --- <%= res.identifying_characteristics %></div>
-    <% }); %>
+    <div class="results-table">
+        <div class="results-header">
+            <div class="result-item">Description</div>
+            <div class="result-item">Identifying Characteristics</div>
+            <div class="result-item">Filed Date</div>
+            <div class="result-item">Lost Date</div>
+        </div>
+        <div class="results-body">
+            <% _.each(results, function(res) { %>
+            <div data-status="<%= res.status %>" data-id="<%= res.id %>" class="result" style="display:none;">
+                <div class="result-item"><%= res.description %></div>
+                <div class="result-item"><%= res.identifying_characteristics %></div>
+                <div class="result-item"><%= res.filed_datetime %></div>
+                <div class="result-item"><%= res.approximate_lost_datetime %></div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
 <% } %>

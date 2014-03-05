@@ -1,0 +1,34 @@
+<div class="item-details">
+    <h3>User Information</h3>
+    <div class="user-info">
+        <div class="info-row">
+            <div class="info-cell"><%= item.loser_name %></div>
+            <div class="info-cell"><%= item.loser_email %></div>
+            <div class="info-cell"><%= item.loser_phone %></div>
+        </div>
+    </div>
+
+    <h3>Nearby Taxis</h3>
+    <div class="taxi-info">
+        <ul>
+        <% _.each(companies, function(company) { %>
+            <li>
+                <div class="info-row">
+                    <div class="info-cell"><%= company.name %></div>
+                    <div class="info-cell"><%= company.email %></div>
+                    <div class="info-cell"><%= company.phone %></div>
+                </div>
+            </li>
+        <% }); %>
+        </ul>
+    </div>
+
+    <h3>Messages</h3>
+    <div class="messages">
+        <ul>
+        <% _.each(messages, function(message) { %>
+            <li><% if (message.commenter) { %><%= message.commenter.name %><% } else { %><%= item.loser_name %><% } %>: <%= message.message %></li>
+        <% }); %>
+        </ul>
+    </div>
+</div>

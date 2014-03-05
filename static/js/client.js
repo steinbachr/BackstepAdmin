@@ -5,18 +5,34 @@ var base = {
     resultsCont: '.results',
     popupCont: '.popup',
     messagesCont: '.messages-container ul',
+
     messageTpl: "<li data-id='<%= id %>'><span class='iconic bolt'></span>" +
         "A <%= color %> <%= type %> lost. Identifying Characteristics: <%= identifying_characteristics %>" +
         "<span class='iconic x'></span></li>",
     socket: mySocket.init(urls.baseUrl),
 
+    addedFilters: {
+        status: undefined,
+        city: undefined
+    },
+
     /*
     filter the results of the page
-     @param filterVal - the value to use for filtering
+    @param $btn - the button that was clicked for the filter
     */
-    _filterResults: function(filterVal) {
+    _filterResults: function($btn) {
         $(this.resultsCont).find('.result').hide();
-        $(this.resultsCont).find("div[data-status='"+filterVal+"']").show();
+
+        var $results = $(this.resultsCont).find(".result");
+        for (var filt in this.addedFilters) {
+            $results = this.addedFilters[filt] !== undefined ? $results.filter(".result[data-"+filt+"='"+this.addedFilters[filt]+"']") : $results;
+        }
+        $results.show();
+
+        if ($btn) {
+            $btn.siblings().removeClass('selected');
+            $btn.addClass('selected');
+        }
     },
 
     /*
@@ -54,32 +70,28 @@ var base = {
         /* websocket bindings */
         this._socketBinding();
 
-        this._filterResults(0);
+        this.addedFilters.status = 0;
+        this._filterResults(undefined);
     },
 
     clickBindings: function() {
         var _this = this;
 
         /**-- Locations bar click bindings --**/
-        $(this.locationsCont).on('click', 'span:not(.show-all)', function() {
-            var locQuery = $(this).text();
-            var filterResult = _this._filterResults(_this.locFilterUrl, locQuery);
-            filterResult.done(function(resp) {
-                $(_this.locationsCont).html(resp);
-            });
+        $(this.locationsCont).on('click', '.purple-link', function() {
+            _this.addedFilters.city = $(this).find('.city-name').text();
+            _this._filterResults($(this));
         });
-        $(this.locationsCont).on('click', '.show-all', function() {
-            $('.extra-loc').toggle();
-            $(this).text() === '<<' ? $(this).text('>>') : $(this).text('<<');
+        $(this.locationsCont).on('click', '.remove-filter', function() {
+            _this.addedFilters.city = undefined;
+            _this._filterResults($(this));
         });
+
 
         /**-- State bar click bindings --**/
         $(this.statesCont).on('click', '.state-btn', function() {
-            var statusQuery = $(this).data('key');
-            _this._filterResults(statusQuery);
-
-            $(this).siblings().removeClass('selected');
-            $(this).addClass('selected');
+            _this.addedFilters.status = $(this).data('key');
+            _this._filterResults($(this));
         });
 
         /**-- Messages click bindings --**/

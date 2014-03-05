@@ -31,26 +31,14 @@ server.listen(process.env.PORT || 3000);
 /*
 this helper function is for rendering the locations header as appropriate
 @param locName - the selected location name
+@param locations - array of objects with keys of city names and values of the number of items in that city
 @return rendered string of the locations header
 */
-var renderLocation = function(locName) {
+var renderLocation = function(locName, locations) {
     return subRenderer.render('locations_header.html', {
-        defaultShow: 2,
+        defaultShow: 3,
         fullExpand: false,
-        selectedLocation: {
-            name: locName
-        },
-        locs: [
-            {
-                name: 'Las Vegas'
-            },
-            {
-                name: 'New York'
-            },
-            {
-                name: 'New Vegas'
-            }
-        ]
+        locs: locations
     });
 };
 
@@ -95,10 +83,17 @@ app.get('/', function(req, res){
             }).length;
         });
 
+        /* bucket the items in the response by their location and construct a mapping of location names to the num of items in that location */
+        var locations = {};
+        data.map(function(item) {
+            var cityItemCount = locations[item.city];
+            locations[item.city] = cityItemCount ? cityItemCount + 1 : 1;
+        });
+
         res.render('page', {
             title: 'Admin Home',
             itemsCount: data.length,
-            locations: renderLocation('Las Vegas'),
+            locations: renderLocation('Las Vegas', locations),
             completionStates: renderCompletionStates('Reported', statusCounts),
             results: renderResults(data)
         });

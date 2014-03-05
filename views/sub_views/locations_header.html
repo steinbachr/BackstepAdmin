@@ -1,11 +1,7 @@
 <nav>
-    <% _.each(locs, function(loc, i) { %>
-    <span class="purple-link<% if (selectedLocation.name === loc.name) { %> selected<% } %><% if (i >= defaultShow) { %> extra-loc<% } %>">
-        <%= loc.name %>
-    </span>
-    <% }); %>
+    <span class="purple-link remove-filter selected">All</span>
 
-    <% if (!fullExpand && locs.length >= defaultShow) { %>
-    <span class="purple-link show-all">>></span>
-    <% } %>
+    <% _.each(Object.keys(locs), function(city, i) { %>
+    <span class="purple-link"><span class="city-name"><%= city %></span>(<%= locs[city] %>)</span>
+    <% }); %>
 </nav>

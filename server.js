@@ -9,8 +9,7 @@ var express = require('express'),
 /* create the server and its connections */
 var app = express(),
     http = require('http'),
-    server = http.createServer(app),
-    socket = require('socket.io').listen(server);
+    server = http.createServer(app);
 
 
 
@@ -157,38 +156,3 @@ app.post('/items/:id/status/', function(req, res) {
 
     res.send();
 });
-
-
-
-
-
-/*****-----< Socket.io >-----*****/
-(function() {
-    /* this function checks our remote BackStep api for any new items and emits the event through the given socket */
-    var pollApi = function(client) {
-        var filterObj = {};
-        filterObj[api.filters.items.adminSeen] = 'False';
-
-        rest.get(api.includeFilters(api.items, filterObj), {}).on('complete', function (data, response) {
-            console.log("data is "+data);
-
-            client.emit('newItems', {
-                items: JSON.stringify(data)
-            });
-
-
-            /* only after we've received a response, should we try and poll again */
-            startPolling(client);
-        });
-    };
-
-    var startPolling = function(client) {
-        setTimeout(function() {
-	        pollApi(client);
-        }, 10000);
-    };
-
-    socket.on('connection', function(client) {
-        pollApi(client);
-    });
-}());

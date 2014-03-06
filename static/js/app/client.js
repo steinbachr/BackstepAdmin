@@ -11,7 +11,6 @@ var base = {
     messageTpl: "<li data-id='<%= id %>'><span class='iconic bolt'></span>" +
         "A <%= color %> <%= type %> lost. Identifying Characteristics: <%= identifying_characteristics %>" +
         "<span class='iconic x'></span></li>",
-    socket: mySocket.init(urls.baseUrl),
 
     addedFilters: {
         status: undefined,
@@ -37,36 +36,6 @@ var base = {
             $btn.siblings().removeClass('selected');
             $btn.addClass('selected');
         }
-    },
-
-    /*
-    setup the socket bindings (for responses)
-     */
-    _socketResponseBinding: function(resp) {
-        var _this = this;
-        var allCompiled = '',
-            items = $.parseJSON(resp.items);
-
-        _.each(items, function(item) {
-            var tpl = _.template(_this.messageTpl),
-                compiled = tpl(item);
-
-            allCompiled += compiled;
-        });
-
-//        var prevCount = parseInt($(_this.counterCont).find('.total-items').text());
-//        $(_this.counterCont).find('.total-items').text(prevCount + items.length);
-        $(_this.messagesCont).html(allCompiled);
-    },
-
-    /*
-    bind to the emitting sockets from the server
-     */
-    _socketBinding: function() {
-        var _this = this;
-        this.socket.bindMessage('newItems', function(resp) {
-            _this._socketResponseBinding.call(_this, resp);
-        });
     },
 
     /*
@@ -108,7 +77,6 @@ var base = {
 
     init: function() {
         this.clickBindings();
-        this._socketBinding();
         this._dragDropBinding();
 
         this.addedFilters.status = 0;

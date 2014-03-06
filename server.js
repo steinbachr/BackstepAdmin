@@ -72,10 +72,16 @@ var renderResults = function(results) {
 
 
 
+
 /*****-----< Routes >-----*****/
 app.get('/', function(req, res){
     rest.get(api.items, {}).on('complete', function(data, response) {
         console.log("got " + data.length + " items");
+
+        /* make sure we're not showing items that have a finder, these items should only appear when we're trying to source an item */
+        data = data.filter(function(el) {
+            return el.finder === null;
+        });
 
         /* bucket the items in the response by their status and get the counts for each bucket */
         var statusCounts = constants.statuses.map(function(status) {
@@ -123,21 +129,10 @@ app.get('/items/:id/', function(req, res){
 app.get('/items/:id/nearby-found/', function(req, res){
     var id = req.params.id;
 
-    rest.get(api.items+"id"+"/nearby_found_items/", {}).on('complete', function(nearby, response) {
+    rest.get(api.items+id+"/nearby_found_items/", {}).on('complete', function(nearby, response) {
         console.log("fetched items were " + nearby);
         res.send(JSON.stringify(nearby));
     });
-});
-
-app.post('/items/:id/seen/', function(req, res) {
-    var id = req.params.id;
-    console.log('issuing put request for admin seen');
-    /* when an item in new messages is marked for removal, this method is called which issues a put request to mark the item as seen */
-    rest.putJson(api.items+id+"/", {
-        admin_seen: 1
-    });
-
-    res.send();
 });
 
 app.post('/items/:id/status/', function(req, res) {

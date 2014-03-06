@@ -100,23 +100,14 @@ var base = {
             _this._filterResults($(this));
         });
 
-
         /**-- State bar click bindings --**/
         $(this.statesCont).on('click', '.state-btn', function() {
             _this.addedFilters.status = $(this).data('key');
             _this._filterResults($(this));
         });
 
-        /**-- Messages click bindings --**/
-        $(this.messagesCont).on('click', '.x', function() {
-            var $message = $(this).closest('li'),
-                itemId = $message.data('id');
-            $.post(urls.items+itemId+"/seen/");
-            $message.fadeOut();
-        });
-
         /**-- Results Click Bindings --**/
-        $(this.resultsCont).on('click', 'div', function() {
+        $(this.resultsCont).on('click', 'div.result', function() {
             var resultId = $(this).data('id'),
                 $details = $(_this.popupCont),
                 $overlay = $(_this.overlayCont);
@@ -137,12 +128,20 @@ var base = {
             $(this).hide();
         });
 
-        $(this.resultsCont).on('click', '.nearby-items-header', function() {
-            var deferred = $.get(urls.items+"/"+_this.openedItemId+"/nearby-found/", {});
-            deferred.success(function(data) {
-                var parsed = $.parseJSON(data);
-//                var itemTpl = "<li><div class='info-row'><div class='info-cell'><%= </div>""
+        $(document).on('click', '.nearby-items-header', function() {
+            var deferred = $.get(urls.items+_this.openedItemId+"/nearby-found/", {}),
+                $_this = $(this);
 
+            $(this).next().slideToggle();
+            deferred.success(function(data) {
+                var items = $.parseJSON(data);
+                var itemTpl = _.template("<tr><td><a href='http://www.back-step.com<%= finder.profile_url %>' target='_blank'><%= finder.name %></a></td><td><%= color %></td><td><%= type %></td><td><%= identifying_characteristics %></td></tr>");
+                var compiled = "";
+                _.each(items, function(item) {
+                    compiled += itemTpl(item);
+                });
+
+                $_this.next().find('tbody').html(compiled);
             });
         })
     }

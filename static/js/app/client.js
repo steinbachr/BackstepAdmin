@@ -135,7 +135,10 @@ var base = {
             $(this).next().slideToggle();
             deferred.success(function(data) {
                 var items = $.parseJSON(data);
-                var itemTpl = _.template("<tr><td><a href='http://www.back-step.com<%= finder.profile_url %>' target='_blank'><%= finder.name %></a></td><td><%= color %></td><td><%= type %></td><td><%= identifying_characteristics %></td></tr>");
+                var itemTpl = _.template(
+                    "<tr><td><a href='http://www.back-step.com<%= finder.profile_url %>' target='_blank'><%= finder.name %></a></td>" +
+                    "<td><%= color %></td><td><%= type %></td><td><%= identifying_characteristics %></td>" +
+                    "<td><a href='#' class='sourcing-attempts'>check</a></td><td><div class='btn btn-success'>s</div><div class='btn btn-unknown'>i</div><div class='btn btn-failure'>f</div></td></tr>");
                 var compiled = "";
                 _.each(items, function(item) {
                     compiled += itemTpl(item);

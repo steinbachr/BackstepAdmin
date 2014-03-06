@@ -151,3 +151,19 @@ app.post('/items/:id/status/', function(req, res) {
 
     res.send();
 });
+
+app.post('/items/:id/sourcing-attempt/', function(req, res) {
+    var id = req.params.id,
+        result = req.body.result;
+
+    /* when an item in new messages is marked for removal, this method is called which issues a put request to mark the item as seen */
+    rest.putJson(api.items+id+"/", {
+        status: newStatus
+    }).on('complete', function(data, response) {
+            console.log("now sending email to user");
+            /* once we get a response, send the user an email telling them about the item update */
+            rest.post(api.items+id+api.actions.sendItemEmail, {});
+    });
+
+    res.send();
+});

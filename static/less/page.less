@@ -14,6 +14,7 @@
 @royal-purple: #440666;
 @yellow: #f9f190;
 @green: #88cea0;
+@red: #ef855b;
 
 
 
@@ -100,14 +101,22 @@ body { background:@dark-gray; .alegraya_family();
         }
     }
     .popup { display:none; margin:auto; position:fixed; top:0; left:0; bottom:0; right:0; width:50%; height:400px; background:white; overflow-y:scroll; overflow-x:hidden; z-index:10;
-        .item-details { color:black; cursor:auto; padding:10px 5px 20px 5px; border:solid 2px black; height:600px; border-bottom:none; overflow-y:scroll;
-            h3 { .audiowide_family; color:@darker-gray; margin-top:50px; border-bottom:solid 2px @vibrant-purple;
+        .item-details { color:black; cursor:auto; padding:10px 0px 20px 0px; border:solid 2px black; height:600px; border-bottom:none; overflow-y:scroll;
+            h3 { .audiowide_family; background:@darker-gray; color:@green; margin-top:50px; padding:15px;
                 &:first-child { margin-top:10px; }
-                &.nearby-items-header { cursor:pointer; }
+                &.nearby-items-header { cursor:pointer; color:@purple-link; }
             }
-            table { width:90%;
-                thead th { .audiowide_family; color:@purple-white; background:@darkmed-gray; }
-                tbody td { text-align:center; }
+            table { width:100%;
+                thead th { .audiowide_family; color:@purple-white; background:@darkmed-gray; padding:5px; }
+                tbody td { text-align:center;
+                    .btn { display:inline-block; padding:10px; border-radius:10px; color:white; margin:0 3px; cursor:pointer;
+                        &:hover { opacity:.8; }
+                        &.btn-success { background:@green; }
+                        &.btn-unknown { background:@yellow; }
+                        &.btn-failure { background:@red; }
+                        &.selected { background:@darker-gray; }
+                    }
+                }
             }
         }
     }

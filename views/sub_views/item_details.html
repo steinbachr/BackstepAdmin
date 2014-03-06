@@ -45,6 +45,8 @@
                 <th>Color</th>
                 <th>Type</th>
                 <th>Identifying Characteristics</th>
+                <th>Sourcing Attempts</th>
+                <th>New Attempt</th>
             </tr>
         </thead>
         <tbody>
@@ -52,6 +54,7 @@
     </table>
 
     <h3>Messages</h3>
+    <% if (messages.length > 0) { %>
     <table>
         <thead>
             <tr>
@@ -68,6 +71,6 @@
             <% }); %>
         </tbody>
     </table>
-
+    <% } %>
     <h3>Status Url <a href="http://www.back-step.com<%= item.status_url %>" target="_blank">here</a></h3>
 </div>

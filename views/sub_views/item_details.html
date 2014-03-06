@@ -1,36 +1,73 @@
 <div class="item-details">
     <h3>User Information</h3>
-    <div class="user-info">
-        <div class="info-row">
-            <div class="info-cell"><%= item.loser_name %></div>
-            <div class="info-cell"><%= item.loser_email %></div>
-            <div class="info-cell"><%= item.loser_phone %></div>
-        </div>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%= item.loser_name %></td>
+                <td><%= item.loser_email %></td>
+                <td><%= item.loser_phone %></td>
+            </tr>
+        </tbody>
+    </table>
 
     <h3>Nearby Taxis</h3>
-    <div class="taxi-info">
-        <ul>
-        <% _.each(companies, function(company) { %>
-            <li>
-                <div class="info-row">
-                    <div class="info-cell"><%= company.name %></div>
-                    <div class="info-cell"><%= company.email %></div>
-                    <div class="info-cell"><%= company.phone %></div>
-                </div>
-            </li>
-        <% }); %>
-        </ul>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Company Email</th>
+                <th>Company Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(companies, function(company) { %>
+            <tr>
+                <td><%= company.name %></td>
+                <td><%= company.email %></td>
+                <td><%= company.phone %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
 
-
+    <h3 class="nearby-items-header">Nearby Found Items (click to show)</h3>
+    <table class="nearby-items">
+        <thead>
+            <tr>
+                <th>Finder</th>
+                <th>Color</th>
+                <th>Type</th>
+                <th>Identifying Characteristics</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
     <h3>Messages</h3>
-    <div class="messages">
-        <ul>
-        <% _.each(messages, function(message) { %>
-            <li><% if (message.commenter) { %><%= message.commenter.name %><% } else { %><%= item.loser_name %><% } %>: <%= message.message %></li>
-        <% }); %>
-        </ul>
-    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Commenter</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(messages, function(message) { %>
+            <tr>
+                <td><% if (message.commenter) { %><%= message.commenter.name %><% } else { %><%= item.loser_name %><% } %></td>
+                <td><%= message.message %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <h3>Status Url <a href="http://www.back-step.com<%= item.status_url %>" target="_blank">here</a></h3>
 </div>

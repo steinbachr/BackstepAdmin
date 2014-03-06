@@ -121,6 +121,15 @@ app.get('/items/:id/', function(req, res){
     });
 });
 
+app.get('/items/:id/nearby-found/', function(req, res){
+    var id = req.params.id;
+
+    rest.get(api.items+"id"+"/nearby_found_items/", {}).on('complete', function(nearby, response) {
+        console.log("fetched items were " + nearby);
+        res.send(JSON.stringify(nearby));
+    });
+});
+
 app.post('/items/:id/seen/', function(req, res) {
     var id = req.params.id;
     console.log('issuing put request for admin seen');
@@ -134,15 +143,22 @@ app.post('/items/:id/seen/', function(req, res) {
 
 app.post('/items/:id/status/', function(req, res) {
     var id = req.params.id,
-        newStatus = req.body.status;
+        newStatus = req.body.status,
+        oldStatus = req.body.oldStatus;
 
     /* when an item in new messages is marked for removal, this method is called which issues a put request to mark the item as seen */
     rest.putJson(api.items+id+"/", {
         status: newStatus
+    }).on('complete', function(data, response) {
+            console.log("now sending email to user");
+            /* once we get a response, send the user an email telling them about the item update */
+            rest.post(api.items+id+api.actions.sendItemEmail, {});
     });
 
     res.send();
 });
+
+
 
 
 

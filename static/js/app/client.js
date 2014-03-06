@@ -5,6 +5,7 @@ var base = {
     statesCont: '.states-header',
     resultsCont: '.results',
     popupCont: '.popup',
+    overlayCont: '.overlay',
     messagesCont: '.messages-container ul',
 
     messageTpl: "<li data-id='<%= id %>'><span class='iconic bolt'></span>" +
@@ -16,6 +17,8 @@ var base = {
         status: undefined,
         city: undefined
     },
+
+    openedItemId: null,
 
     /*
     filter the results of the page
@@ -87,7 +90,10 @@ var base = {
                         statusKey = $statusTarget.data('key');
 
                     /* persist the change */
-                    $.post(urls.items + $item.data('id') + "/status/", {status: statusKey});
+                    $.post(urls.items + $item.data('id') + "/status/", {
+                        status: statusKey,
+                        oldStatus: $item.data('status')
+                    });
 
                     /* show the change on the frontend */
                     var oldCount = parseInt($statusTarget.find('.count').text());
@@ -113,7 +119,7 @@ var base = {
         var _this = this;
 
         $(this.refreshCont).on('click', function() {
-            window.location = window.location;
+            location.reload();
         });
 
         /**-- Locations bar click bindings --**/
@@ -144,26 +150,33 @@ var base = {
         /**-- Results Click Bindings --**/
         $(this.resultsCont).on('click', 'div', function() {
             var resultId = $(this).data('id'),
-                $details = $(_this.popupCont);
+                $details = $(_this.popupCont),
+                $overlay = $(_this.overlayCont);
+            _this.openedItemId = resultId;
 
-            $('body').css('overflow', 'hidden');
+            $overlay.show();
             $.get(urls.items + resultId + "/").success(function(rendered) {
                 $details.html(rendered);
-
-                $(document).on('click', function(evt) {
-                    if ($(evt.target).closest('.popup').length < 1 && $details.is(':visible')) {
-                        $details.fadeOut();
-                        $('body').css('overflow', 'scroll');
-                    }
-
-                });
-
                 $details.fadeIn();
             });
 
             $(this).siblings().removeClass('selected');
             $(this).addClass('selected');
         });
+
+        $(this.overlayCont).on('click', function(evt) {
+            $(_this.popupCont).fadeOut();
+            $(this).hide();
+        });
+
+        $(this.resultsCont).on('click', '.nearby-items-header', function() {
+            var deferred = $.get(urls.items+"/"+_this.openedItemId+"/nearby-found/", {});
+            deferred.success(function(data) {
+                var parsed = $.parseJSON(data);
+//                var itemTpl = "<li><div class='info-row'><div class='info-cell'><%= </div>""
+
+            });
+        })
     }
 };
 

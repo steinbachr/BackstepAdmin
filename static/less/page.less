@@ -40,16 +40,20 @@
 
 /*****-----< General >-----*****/
 .ui-draggable-dragging { background:@vibrant-purple; color:white; width:30%; }
+a { color:@purple-link; }
 
 
 
 
 
 body { background:@dark-gray; .alegraya_family();
+    .overlay { position:fixed; top:0; left:0; height:100%; width:100%; z-index:5; background:black; opacity: .7;}
     h1 { .audiowide_family; .gigantic_font; text-align:center; color:@purple-white; }
     .counter, .refresh { position:absolute; top:0; right:20px; color:@purple-white;
         span { font-size:30px; }
-        &.refresh { left:20px; top:20px; cursor:pointer; }
+        &.refresh { left:20px; top:20px; cursor:pointer;
+            span { padding-right:10px; }
+        }
     }
     .container { padding-left:50px; margin-top:30px;
         .locations-container {
@@ -95,14 +99,16 @@ body { background:@dark-gray; .alegraya_family();
             }
         }
     }
-    .popup { display:none; margin:auto; position:absolute; top:0; left:0; bottom:0; right:0; width:50%; height:400px; background:white; overflow-y:scroll; overflow-x:hidden;
-        .item-details { color:black; cursor:auto; padding:10px 5px; border:solid 2px black; height:100%;
+    .popup { display:none; margin:auto; position:fixed; top:0; left:0; bottom:0; right:0; width:50%; height:400px; background:white; overflow-y:scroll; overflow-x:hidden; z-index:10;
+        .item-details { color:black; cursor:auto; padding:10px 5px 20px 5px; border:solid 2px black; height:600px; border-bottom:none; overflow-y:scroll;
             h3 { .audiowide_family; color:@darker-gray; margin-top:50px; border-bottom:solid 2px @vibrant-purple;
                 &:first-child { margin-top:10px; }
+                &.nearby-items-header { cursor:pointer; }
             }
-            .info-row { display:table; width:70%; white-space:nowrap}
-            .info-cell { display:table-cell; padding:10px 50px; }
-            ul { list-style-type:none; padding-left:0; }
+            table { width:90%;
+                thead th { .audiowide_family; color:@purple-white; background:@darkmed-gray; }
+                tbody td { text-align:center; }
+            }
         }
     }
 }

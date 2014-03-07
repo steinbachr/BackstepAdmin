@@ -75,6 +75,13 @@ var base = {
         });
     },
 
+    /*
+    refresh the page. When we switch over to BackBone, this can be smarter
+     */
+    _refresh: function() {
+        location.reload();
+    },
+
     init: function() {
         this.clickBindings();
         this._dragDropBinding();
@@ -87,7 +94,7 @@ var base = {
         var _this = this;
 
         $(this.refreshCont).on('click', function() {
-            location.reload();
+            _this._refresh();
         });
 
         /**-- Locations bar click bindings --**/
@@ -123,12 +130,13 @@ var base = {
             $(this).addClass('selected');
         });
 
+        /**-- Popup Click Bindings --**/
         $(this.overlayCont).on('click', function(evt) {
             $(_this.popupCont).fadeOut();
             $(this).hide();
         });
 
-        $(document).on('click', '.nearby-items-header', function() {
+        $(this.popupCont).on('click', '.nearby-items-header', function() {
             var deferred = $.get(urls.items+_this.openedItemId+"/nearby-found/", {}),
                 $_this = $(this);
 
@@ -137,8 +145,7 @@ var base = {
                 var items = $.parseJSON(data);
                 var itemTpl = _.template(
                     "<tr><td><a href='http://www.back-step.com<%= finder.profile_url %>' target='_blank'><%= finder.name %></a></td>" +
-                    "<td><%= color %></td><td><%= type %></td><td><%= identifying_characteristics %></td>" +
-                    "<td><a href='#' class='sourcing-attempts'>check</a></td><td><div class='btn btn-success'>s</div><div class='btn btn-unknown'>i</div><div class='btn btn-failure'>f</div></td></tr>");
+                    "<td><%= color %></td><td><%= type %></td><td><%= identifying_characteristics %></td>");
                 var compiled = "";
                 _.each(items, function(item) {
                     compiled += itemTpl(item);
@@ -146,7 +153,19 @@ var base = {
 
                 $_this.next().find('tbody').html(compiled);
             });
-        })
+        });
+
+        /* click of a .btn means a new sourcing attempt is being created */
+        $(this.popupCont).on('click', '.btn', function() {
+            var companyId = $(this).closest('tr').data('id'),
+                result = $(this).data('result');
+
+            var deferred = $.post(urls.items+_this.openedItemId+"/sourcing-attempt/", {
+                result: result,
+                companyId: companyId
+            });
+            deferred.done(_this._refresh);
+        });
     }
 };
 

@@ -1,6 +1,7 @@
 module.exports = {
     items: "http://www.back-step.com/api/items/",
     companies: "http://www.back-step.com/api/companies/",
+    attempts: "http://www.back-step.com/api/attempts/",
 
     filters: {
         items: {
@@ -14,10 +15,9 @@ module.exports = {
     },
 
     actions: {
-        sendItemEmail: (function() {
-            var subject = encodeURIComponent("You Have A New Status Update for Your Lost Item!");
-            return '/send_item_email/?email=item_status_change&email_subj=' + subject;
-        }())
+        sendItemEmail: function(emailTpl, emailSubj) {
+            return '/send_item_email/?email='+emailTpl+'&email_subj=' + encodeURIComponent(emailSubj);
+        }
     },
 
 
@@ -41,5 +41,13 @@ module.exports = {
         console.log("getting url "+endpoint);
 
         return endpoint;
+    },
+
+    /**
+     * get the equivalent pythonic boolean value (True, False) for the given javascript value
+     * @param jsVal
+     */
+    booleanForApi: function(jsVal) {
+        return jsVal ? 'True' : 'False';
     }
-}
+};

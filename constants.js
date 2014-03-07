@@ -17,10 +17,6 @@ module.exports = {
             name: 'Match Approved'
         },
         {
-            key: 4,
-            name: 'Delivered'
-        },
-        {
             key: -1,
             name: 'Refund Almost Required'
         },
@@ -29,4 +25,4 @@ module.exports = {
             name: 'Refund Required'
         }
     ]
-}
+};

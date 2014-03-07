@@ -17,21 +17,25 @@
         </tbody>
     </table>
 
-    <h3>Nearby Taxis</h3>
+    <h3>Nearby Companies</h3>
     <table>
         <thead>
             <tr>
-                <th>Company Name</th>
-                <th>Company Email</th>
-                <th>Company Phone</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Sourcing Attempts</th>
+                <th>New Attempt</th>
             </tr>
         </thead>
         <tbody>
             <% _.each(companies, function(company) { %>
-            <tr>
+            <tr data-id="<%= company.id %>">
                 <td><%= company.name %></td>
                 <td><%= company.email %></td>
                 <td><%= company.phone %></td>
+                <td><% _.each(company.sourcing_attempts, function(att) { %><div class="res <% if (att.success) { %>success<% } else if (att.success === null) { %>unknown<% } else { %>failure<% } %>"></div> <% }); %></td>
+                <td><div class='btn success' data-result="success">s</div><div class='btn unknown'>i</div><div class='btn failure' data-result="failure">f</div></td>
             </tr>
             <% }); %>
         </tbody>
@@ -45,8 +49,6 @@
                 <th>Color</th>
                 <th>Type</th>
                 <th>Identifying Characteristics</th>
-                <th>Sourcing Attempts</th>
-                <th>New Attempt</th>
             </tr>
         </thead>
         <tbody>

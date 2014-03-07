@@ -116,7 +116,17 @@ app.get('/items/:id/', function(req, res){
         var filterObj = {};
         filterObj[api.filters.companies.city] = city;
         rest.get(api.includeFilters(api.companies, filterObj), {}).on('complete', function(companies, response) {
-            console.log("fetched companies were " + companies);
+            console.log("fetched companies were " + JSON.stringify(companies));
+
+            /* add a key for 'sourcing attempts' for each company in the response */
+            companies = companies.map(function(company) {
+                company['sourcing_attempts'] = item.sourcing_attempts.filter(function(attempt) {
+                    return attempt.company === company.id;
+                });
+
+                return company;
+            });
+
             res.send(subRenderer.render('item_details.html', {
                 item: item,
                 messages: item.item_messages,
@@ -146,7 +156,7 @@ app.post('/items/:id/status/', function(req, res) {
     }).on('complete', function(data, response) {
             console.log("now sending email to user");
             /* once we get a response, send the user an email telling them about the item update */
-            rest.post(api.items+id+api.actions.sendItemEmail, {});
+            rest.post(api.items+id+api.actions.sendItemEmail('item_status_change', 'You Have A New Status Update for Your Lost Item!'), {});
     });
 
     res.send();
@@ -154,16 +164,35 @@ app.post('/items/:id/status/', function(req, res) {
 
 app.post('/items/:id/sourcing-attempt/', function(req, res) {
     var id = req.params.id,
-        result = req.body.result;
+        result = req.body.result,
+        companyId = req.body.companyId,
+        success = result === 'success';
+
+    var postParams = (function(result) {
+        var params = {
+            company: companyId,
+            item: id
+        };
+
+        if (result) {
+            params['success'] = success ? 'True' : 'False';
+        }
+
+        return params;
+    }(result));
 
     /* when an item in new messages is marked for removal, this method is called which issues a put request to mark the item as seen */
-    rest.putJson(api.items+id+"/", {
-        status: newStatus
-    }).on('complete', function(data, response) {
-            console.log("now sending email to user");
-            /* once we get a response, send the user an email telling them about the item update */
-            rest.post(api.items+id+api.actions.sendItemEmail, {});
+    rest.postJson(api.attempts, postParams).on('complete', function(data, response) {
+            console.log("created new sourcing attempt "+JSON.stringify(data));
+            /* if the result was a success, then update the items status to 'match found' and email the user telling them so */
+            if (success) {
+                rest.putJson(api.items+id+"/", { status: 2 }).on('complete', function(item, resp) {
+                    console.log('item status updated');
+                    rest.post(api.items+id+api.actions.sendItemEmail('potential_match_found', 'Potential Match Found'), {});
+                    res.send();
+                });
+            } else {
+                res.send();
+            }
     });
-
-    res.send();
 });

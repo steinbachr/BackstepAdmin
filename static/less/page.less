@@ -14,7 +14,7 @@
 @royal-purple: #440666;
 @yellow: #f9f190;
 @green: #88cea0;
-@red: #ef855b;
+@red: #e24000;
 
 
 
@@ -42,7 +42,11 @@
 /*****-----< General >-----*****/
 .ui-draggable-dragging { background:@vibrant-purple; color:white; width:30%; }
 a { color:@purple-link; }
-
+.res { display:inline-block; padding:7px; border-radius:10px; color:white; margin:0 3px; cursor:pointer;
+    &.success { background:@green; }
+    &.unknown { background:@yellow; }
+    &.failure { background:@red; }
+}
 
 
 
@@ -109,12 +113,12 @@ body { background:@dark-gray; .alegraya_family();
             table { width:100%;
                 thead th { .audiowide_family; color:@purple-white; background:@darkmed-gray; padding:5px; }
                 tbody td { text-align:center;
-                    .btn { display:inline-block; padding:10px; border-radius:10px; color:white; margin:0 3px; cursor:pointer;
+                    .btn { display:inline-block; padding:7px; border-radius:10px; color:white; margin:0 3px; cursor:pointer;
                         &:hover { opacity:.8; }
-                        &.btn-success { background:@green; }
-                        &.btn-unknown { background:@yellow; }
-                        &.btn-failure { background:@red; }
-                        &.selected { background:@darker-gray; }
+                        &:focus { background:@darker-gray; }
+                        &.success { background:@green; }
+                        &.unknown { background:@yellow; }
+                        &.failure { background:@red; }
                     }
                 }
             }

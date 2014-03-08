@@ -1,0 +1,3 @@
+LostItem = {
+    nearbyItems: []
+}

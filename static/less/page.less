@@ -47,6 +47,9 @@ a { color:@purple-link; }
     &.unknown { background:@yellow; }
     &.failure { background:@red; }
 }
+.gmap-container { height:100px;
+    #map-canvas { height: 100% }
+}
 
 
 
@@ -60,7 +63,7 @@ body { background:@dark-gray; .alegraya_family();
             span { padding-right:10px; }
         }
     }
-    .container { padding-left:50px; margin-top:30px;
+    .container { margin:30px auto 0px auto; width:99%;
         .locations-container {
             span.purple-link { color:@purple-link; margin-right:10px; .smaller_font; cursor:pointer;
                 &.selected { font-weight:bold;  .larger_font; }
@@ -93,16 +96,7 @@ body { background:@dark-gray; .alegraya_family();
             }
         }
 
-        .messages-container { border:solid 1px @royal-purple; width:70%; margin:auto;
-            h3 { background:@darker-gray; text-align:center; color:@green; margin:0; padding:20px; }
-            ul { list-style-type:none; padding:0px; margin:0px; height:200px; overflow:scroll;
-                li { background:@light-gray; padding:15px; border-bottom:solid 2px @gray; color:@royal-purple; font-weight:bold; .medium_font;
-                    span { .medium_font; margin-right:10px;
-                        &.x { float:right; }
-                    }
-                }
-            }
-        }
+        .gmap-container { height:400px; }
     }
     .popup { display:none; margin:auto; position:fixed; top:0; left:0; bottom:0; right:0; width:50%; height:400px; background:white; overflow-y:scroll; overflow-x:hidden; z-index:10;
         .item-details { color:black; cursor:auto; padding:10px 0px 20px 0px; border:solid 2px black; height:600px; border-bottom:none; overflow-y:scroll;

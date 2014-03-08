@@ -147,12 +147,17 @@ var base = {
                     "<tr><td><a href='http://www.back-step.com<%= finder.profile_url %>' target='_blank'><%= finder.name %></a></td>" +
                     "<td><%= color %></td><td><%= type %></td><td><%= identifying_characteristics %></td>");
                 var compiled = "";
+
                 _.each(items, function(item) {
                     compiled += itemTpl(item);
                 });
 
                 $_this.next().find('tbody').html(compiled);
             });
+        });
+
+        $(this.popupCont).on('click', '.map-view', function() {
+            gMap.createMapMarkers();
         });
 
         /* click of a .btn means a new sourcing attempt is being created */

@@ -20,9 +20,10 @@ app.engine('html', cons.underscore);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use('/static', express.static('static'));
-app.use(express.json())
+app.use(express.json());
 app.use(express.bodyParser());
 server.listen(process.env.PORT || 3000);
+app.use(express.basicAuth('steinbachr', 'leonhall'));
 
 
 

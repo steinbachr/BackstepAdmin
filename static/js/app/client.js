@@ -138,11 +138,14 @@ var base = {
             $('body').css('overflow', 'scroll');
         });
 
+        $(this.popupCont).on('click', 'h3', function() {
+            $(this).next().slideToggle();
+        });
+
         $(this.popupCont).on('click', '.nearby-items-header', function() {
             var deferred = $.get(urls.items+_this.openedItemId+"/nearby-found/", {}),
                 $_this = $(this);
 
-            $(this).next().slideToggle();
             deferred.success(function(data) {
                 var items = $.parseJSON(data);
                 var itemTpl = _.template(
@@ -162,14 +165,24 @@ var base = {
             gMap.createMapMarkers();
         });
 
-        /* click of a .btn means a new sourcing attempt is being created */
-        $(this.popupCont).on('click', '.btn', function() {
+        /* create a new sourcing attempt for the item */
+        $(this.popupCont).on('click', '.sourcing-btn', function() {
             var companyId = $(this).closest('tr').data('id'),
                 result = $(this).data('result');
 
             var deferred = $.post(urls.items+_this.openedItemId+"/sourcing-attempt/", {
                 result: result,
                 companyId: companyId
+            });
+            deferred.done(_this._refresh);
+        });
+
+        /* an item action is being taken */
+        $(this.popupCont).on('click', '.action-btn', function() {
+            var actionMessage = $(this).parent().find('input').val();
+
+            var deferred = $.post(urls.items+_this.openedItemId+"/action-required/", {
+                message: actionMessage
             });
             deferred.done(_this._refresh);
         });

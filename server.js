@@ -197,3 +197,17 @@ app.post('/items/:id/sourcing-attempt/', function(req, res) {
             }
     });
 });
+
+app.post('/items/:id/action-required/', function(req, res) {
+    var id = req.params.id,
+        message = req.body.message;
+
+    rest.putJson(api.items+id+"/", {
+        action_required: 'True',
+        action_required_message: message
+    }).on('complete', function(data, response) {
+        console.log("set action required");
+        rest.post(api.items+id+api.actions.sendItemEmail('action_required', 'Action Required For Your Lost Item'), {});
+        res.send();
+    });
+});

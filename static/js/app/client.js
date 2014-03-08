@@ -124,6 +124,7 @@ var base = {
             $.get(urls.items + resultId + "/").success(function(rendered) {
                 $details.html(rendered);
                 $details.fadeIn();
+                $('body').css('overflow', 'hidden');
             });
 
             $(this).siblings().removeClass('selected');
@@ -134,6 +135,7 @@ var base = {
         $(this.overlayCont).on('click', function(evt) {
             $(_this.popupCont).fadeOut();
             $(this).hide();
+            $('body').css('overflow', 'scroll');
         });
 
         $(this.popupCont).on('click', '.nearby-items-header', function() {

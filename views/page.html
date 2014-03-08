@@ -17,9 +17,9 @@
     <script type="text/javascript" src="/static/js/app/client.js"></script>
     <script type="text/javascript" src="/static/js/app/map.js"></script>
 
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ObXCUOYqdRUif0DQRWoOcRCJKH9Mvvo&sensor=false">
-    </script>
+    <!--<script type="text/javascript"-->
+      <!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3ObXCUOYqdRUif0DQRWoOcRCJKH9Mvvo&sensor=false">-->
+    <!--</script>-->
 </head>
 <body>
     <div class="overlay" style="display:none;"></div>
@@ -27,6 +27,9 @@
     <div class="refresh"><span class="iconic reload"></span>refresh</div>
     <div class="counter">
         <span class="total-items"><%= itemsCount %></span> items <br />
+    </div>
+    <div class="legend">
+        <span class="iconic target"></span> = Action Required By Loser
     </div>
     <div class="container">
         <!-- Locations go here -->

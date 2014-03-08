@@ -9,6 +9,7 @@
             <div class="result-item">Filed Date</div>
             <div class="result-item">Lost Date</div>
             <div class="result-item">Sourcing Attempts</div>
+            <div class="result-item">Flags</div>
         </div>
         <div class="results-body">
             <% _.each(results, function(res) { %>
@@ -19,6 +20,7 @@
                 <div class="result-item"><%= res.filed_datetime %></div>
                 <div class="result-item"><%= res.approximate_lost_datetime %></div>
                 <div class="result-item"><% _.each(res.sourcing_attempts, function(att) { %><div class="res <% if (att.success) { %>success<% } else if (att.success === null) { %>unknown<% } else { %>failure<% } %>"></div> <% }); %></div>
+                <div class="result-item"><% if (res.action_required) { %><span class="iconic target"></span><% } %></div>
             </div>
             <% }); %>
         </div>

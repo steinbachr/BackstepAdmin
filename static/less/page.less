@@ -1,4 +1,7 @@
 /*****----- Icon Fonts -----*****/
+.iconic {
+    &.target { color:@red; }
+}
 
 
 
@@ -63,6 +66,7 @@ body { background:@dark-gray; .alegraya_family();
             span { padding-right:10px; }
         }
     }
+    .legend { position:absolute; top:40px; right:20px; color:white; }
     .container { margin:30px auto 0px auto; width:99%;
         .locations-container {
             span.purple-link { color:@purple-link; margin-right:10px; .smaller_font; cursor:pointer;
@@ -79,7 +83,7 @@ body { background:@dark-gray; .alegraya_family();
                     }
                 }
             }
-            .results { height:300px; overflow:scroll;
+            .results {
                 h3 { color:@purple-white; }
                 .results-table { display:table; width:100%;
                     .results-header { display:table-header-group; background:@darkmed-gray;

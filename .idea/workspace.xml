@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="page.less" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="page.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/less/page.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="0" selection-start="1181" selection-end="1181" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1890">
+            <state line="68" column="66" selection-start="1773" selection-end="1773" vertical-scroll-proportion="0.8404075" vertical-offset="525" max-vertical-offset="1950">
               <folding />
             </state>
           </provider>
@@ -35,7 +35,16 @@
       <file leaf-file-name="page.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="42" selection-start="1213" selection-end="1213" vertical-scroll-proportion="-2.375" vertical-offset="198" max-vertical-offset="825">
+            <state line="31" column="70" selection-start="1799" selection-end="1799" vertical-scroll-proportion="-11.25" vertical-offset="195" max-vertical-offset="870">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="results.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/sub_views/results.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="0" selection-start="550" selection-end="550" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="510">
               <folding />
             </state>
           </provider>
@@ -44,7 +53,7 @@
       <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="0" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="3075">
+            <state line="99" column="0" selection-start="3113" selection-end="3113" vertical-scroll-proportion="0.0" vertical-offset="1245" max-vertical-offset="3075">
               <folding />
             </state>
           </provider>
@@ -53,7 +62,7 @@
       <file leaf-file-name="client.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/app/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="151" column="21" selection-start="5114" selection-end="5114" vertical-scroll-proportion="0.0" vertical-offset="1957" max-vertical-offset="2775">
+            <state line="137" column="45" selection-start="4477" selection-end="4477" vertical-scroll-proportion="0.0" vertical-offset="1657" max-vertical-offset="2805">
               <folding />
             </state>
           </provider>
@@ -62,25 +71,7 @@
       <file leaf-file-name="item.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/app/models/item.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="1" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="120">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/app/map.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="52" selection-start="1118" selection-end="1118" vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="690">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="item_details.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/sub_views/item_details.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="13" selection-start="2014" selection-end="2014" vertical-scroll-proportion="0.36482084" vertical-offset="676" max-vertical-offset="1350">
+            <state line="2" column="1" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
               <folding />
             </state>
           </provider>
@@ -101,17 +92,17 @@
         <option value="$PROJECT_DIR$/views/sub_views/completion_states.html" />
         <option value="$PROJECT_DIR$/static/js/client.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/views/sub_views/results.html" />
         <option value="$PROJECT_DIR$/api_urls.js" />
         <option value="$PROJECT_DIR$/constants.js" />
         <option value="$PROJECT_DIR$/static/js/app/maps.js" />
         <option value="$PROJECT_DIR$/static/js/app/models/item.js" />
-        <option value="$PROJECT_DIR$/static/less/page.less" />
         <option value="$PROJECT_DIR$/static/js/app/map.js" />
+        <option value="$PROJECT_DIR$/views/sub_views/item_details.html" />
+        <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/views/sub_views/results.html" />
         <option value="$PROJECT_DIR$/static/js/app/client.js" />
         <option value="$PROJECT_DIR$/views/page.html" />
-        <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/views/sub_views/item_details.html" />
+        <option value="$PROJECT_DIR$/static/less/page.less" />
       </list>
     </option>
   </component>
@@ -292,6 +283,70 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fonts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iconic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BackstepAdmin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BackstepAdmin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fonts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iconic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="font" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BackstepAdmin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="BackstepAdmin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fonts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iconic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="font" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="iconic fill" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -572,11 +627,6 @@
         <state line="4" column="72" selection-start="199" selection-end="199" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="180" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/fonts/iconic/font/iconic fill/iconic_fill_demo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="121" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="614" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/sub_views/completion_states.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="12" selection-start="63" selection-end="63" vertical-scroll-proportion="0.048859935" vertical-offset="0" max-vertical-offset="614" />
@@ -597,19 +647,21 @@
         <state line="18" column="50" selection-start="503" selection-end="503" vertical-scroll-proportion="0.3778802" vertical-offset="24" max-vertical-offset="870" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/sub_views/results.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="232" selection-start="1157" selection-end="1348" vertical-scroll-proportion="-12.5" vertical-offset="0" max-vertical-offset="480" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/constants.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="10" selection-start="408" selection-end="408" vertical-scroll-proportion="0.48387095" vertical-offset="0" max-vertical-offset="651" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/less/page.less">
+    <entry file="file://$PROJECT_DIR$/views/sub_views/item_details.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="1181" selection-end="1181" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="1890">
+        <state line="60" column="13" selection-start="2014" selection-end="2014" vertical-scroll-proportion="0.36482084" vertical-offset="676" max-vertical-offset="1350">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/app/map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="0" selection-start="788" selection-end="788" vertical-scroll-proportion="0.62211984" vertical-offset="0" max-vertical-offset="690">
           <folding />
         </state>
       </provider>
@@ -621,37 +673,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/app/map.js">
+    <entry file="file://$PROJECT_DIR$/static/fonts/iconic/font/iconic fill/iconic_fill_demo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="52" selection-start="1118" selection-end="1118" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="690">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/app/client.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="21" selection-start="5114" selection-end="5114" vertical-scroll-proportion="0.0" vertical-offset="1957" max-vertical-offset="2775">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="42" selection-start="1213" selection-end="1213" vertical-scroll-proportion="-2.375" vertical-offset="198" max-vertical-offset="825">
+        <state line="0" column="121" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="614">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="3075">
+        <state line="99" column="0" selection-start="3113" selection-end="3113" vertical-scroll-proportion="0.0" vertical-offset="1245" max-vertical-offset="3075">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/sub_views/item_details.html">
+    <entry file="file://$PROJECT_DIR$/static/js/app/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="13" selection-start="2014" selection-end="2014" vertical-scroll-proportion="0.36482084" vertical-offset="676" max-vertical-offset="1350">
+        <state line="137" column="45" selection-start="4477" selection-end="4477" vertical-scroll-proportion="0.0" vertical-offset="1657" max-vertical-offset="2805">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/sub_views/results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="550" selection-end="550" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="510">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="70" selection-start="1799" selection-end="1799" vertical-scroll-proportion="-11.25" vertical-offset="195" max-vertical-offset="870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/less/page.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="66" selection-start="1773" selection-end="1773" vertical-scroll-proportion="0.8404075" vertical-offset="525" max-vertical-offset="1950">
           <folding />
         </state>
       </provider>

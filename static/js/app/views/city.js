@@ -13,17 +13,15 @@ var CityView = Backbone.View.extend({
     },
 
     events: {
-        'click .purple-link': 'filterResults'
+        'click': 'filterResults'
     },
 
     filterResults: function() {
         window.lostItems.filters.city = this.model.attributes.name;
         window.lostItems.filterResults();
-        
-        var previouslySelected = window.cities.findWhere({selected: true})
-        previouslySelected && previouslySelected.set({selected: false});
 
-        this.model.set({selected: true});
+        this.$el.siblings().removeClass('selected');
+        this.$el.addClass('selected');
     },
 
     render:  function() {

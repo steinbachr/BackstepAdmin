@@ -7,6 +7,21 @@ var ItemStatusView = Backbone.View.extend({
         this.model.on('change', function() {
             _this.render();
         });
+
+        this.$el.droppable({
+            hoverClass: "selected",
+            tolerance: "pointer",
+            drop: function(event, ui) {
+                var $item = ui.draggable,
+                    statusKey = _this.model.attributes.key;
+
+                /* persist the change */
+                var itemModel = window.lostItems.getById($item.data('id'));
+                var deferred = itemModel.save({status: statusKey}, {patch: true});
+
+                _this.model.set({count: _this.model.attributes.count + 1});
+            }
+        });
     },
 
     events: {
@@ -17,10 +32,8 @@ var ItemStatusView = Backbone.View.extend({
         window.lostItems.filters.status = this.model.attributes.key;
         window.lostItems.filterResults();
 
-        var previouslySelected = window.statuses.findWhere({selected: true});
-        previouslySelected && previouslySelected.set({selected: false});
-
-        this.model.set({selected: true});
+        this.$el.siblings().removeClass('selected');
+        this.$el.addClass('selected');
     },
 
     render:  function() {

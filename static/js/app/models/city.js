@@ -1,8 +1,4 @@
-var City = Backbone.Model.extend({
-    defaults: {
-        selected: false
-    }
-});
+var City = Backbone.Model.extend({});
 
 var CityCollection = Backbone.Collection.extend({
     model: City,

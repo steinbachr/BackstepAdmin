@@ -1,8 +1,7 @@
 var LostItemStatus = Backbone.Model.extend({
     defaults: {
         key: 0,
-        name: 'Reported',
-        selected: false
+        name: 'Reported'
     }
 }, {
     statuses: [
@@ -35,4 +34,4 @@ var LostItemStatus = Backbone.Model.extend({
 
 var LostItemStatusCollection = Backbone.Collection.extend({
     model: LostItemStatus
-})
+});

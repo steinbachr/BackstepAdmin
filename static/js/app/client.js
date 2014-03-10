@@ -8,6 +8,7 @@ client = {
             statusTplDeferred = utils.fetchTemplate('item_status.html'),
             cityTplDeferred = utils.fetchTemplate('city.html');
 
+        /* once we've gotten all the templates we can continue */
         $.when(itemTplDeferred, statusTplDeferred, cityTplDeferred).then(function(data, resp) {
             var itemTpl = $.parseJSON(itemTplDeferred.responseText).template,
                 statusTpl = $.parseJSON(statusTplDeferred.responseText).template,
@@ -16,15 +17,17 @@ client = {
             window.lostItems.fetch({
                 success: function(collection, response, options) {
                     _.each(collection.models, function(model) {
-                        new LostItemsView({
+                        var view = new LostItemsView({
                             model: model,
                             template: itemTpl
                         }).render();
+
+                        view.$container.append(view.$el);
                     });
 
                     /* create the nav bar for filtering items by their location */
                     var cityCounts = collection.countBy(function(item) {
-                        return item.attributes.city;
+                        return item.attributes.city.name;
                     });
                     _.each(_.keys(cityCounts), function(cityName) {
                         var city = new City({name: cityName, count:cityCounts[cityName]});
@@ -70,4 +73,9 @@ client = {
 
 $(document).ready(function() {
     client.init();
+
+    $('.overlay').on('click', function() {
+        $(this).hide();
+        $(".popup").fadeOut();
+    })
 });

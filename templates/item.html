@@ -1,0 +1,9 @@
+<div class="result" style="display:none;">
+    <div class="result-item"><%= city %></div>
+    <div class="result-item"><%= description %></div>
+    <div class="result-item"><%= identifying_characteristics %></div>
+    <div class="result-item"><%= filed_datetime %></div>
+    <div class="result-item"><%= approximate_lost_datetime %></div>
+    <div class="result-item"><% _.each(sourcing_attempts, function(att) { %><div class="res <% if (att.success) { %>success<% } else if (att.success === null) { %>unknown<% } else { %>failure<% } %>"></div> <% }); %></div>
+    <div class="result-item"><% if (action_required) { %><span class="iconic target"></span><% } %></div>
+</div>

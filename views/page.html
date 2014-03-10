@@ -12,8 +12,14 @@
     <script type="text/javascript" src="/static/js/vendor/jquery-ui-1.10.4.custom.js"></script>
     <script type="text/javascript" src="/static/js/vendor/less-1.6.3.min.js"></script>
     <script type="text/javascript" src="/static/js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/backbone-min.js"></script>
+    <script type="text/javascript" src="/static/js/app/utils.js"></script>
     <script type="text/javascript" src="/static/js/app/models/item.js"></script>
-    <script type="text/javascript" src="/static/js/app/urls.js"></script>
+    <script type="text/javascript" src="/static/js/app/models/item_status.js"></script>
+    <script type="text/javascript" src="/static/js/app/models/city.js"></script>
+    <script type="text/javascript" src="/static/js/app/views/item.js"></script>
+    <script type="text/javascript" src="/static/js/app/views/item_status.js"></script>
+    <script type="text/javascript" src="/static/js/app/views/city.js"></script>
     <script type="text/javascript" src="/static/js/app/client.js"></script>
     <script type="text/javascript" src="/static/js/app/map.js"></script>
 
@@ -34,16 +40,30 @@
     <div class="container">
         <!-- Locations go here -->
         <div class="locations-container">
-            <%= locations %>
+            <nav>
+            </nav>
         </div>
 
         <!-- Completion states go here -->
         <div class="states-container">
             <div class="states-header">
-                <%= completionStates %>
+                <nav>
+                </nav>
             </div>
             <div class="results">
-                <%= results %>
+                <div class="results-table">
+                    <div class="results-header">
+                        <div class="result-item">City</div>
+                        <div class="result-item">Description</div>
+                        <div class="result-item">Identifying Characteristics</div>
+                        <div class="result-item">Filed Date</div>
+                        <div class="result-item">Lost Date</div>
+                        <div class="result-item">Sourcing Attempts</div>
+                        <div class="result-item">Flags</div>
+                    </div>
+                    <div class="results-body">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

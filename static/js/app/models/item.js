@@ -42,7 +42,7 @@ var LostItemCollection = Backbone.Collection.extend({
         _.each(this.models, function(m) {
             if (_this.filters.city !== undefined) {
                 m.attributes.city.name === _this.filters.city ? m.set({visible: true}) : m.set({visible: false});
-                _this.filters.status && m.attributes.status !== _this.filters.status && m.set({visible: false});
+                _this.filters.status !== undefined && m.attributes.status !== _this.filters.status && m.set({visible: false});
             }
             else if (_this.filters.status !== undefined) {
                 m.attributes.status === _this.filters.status ? m.set({visible: true}) : m.set({visible: false});

@@ -20,6 +20,9 @@ var ItemStatusView = Backbone.View.extend({
                 var deferred = itemModel.save({status: statusKey}, {patch: true});
 
                 _this.model.set({count: _this.model.attributes.count + 1});
+                deferred.done(function() {
+                    itemModel.sendEmail("Your Item's Status Has Changed!");
+                });
             }
         });
     },

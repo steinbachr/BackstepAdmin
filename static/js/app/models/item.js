@@ -20,8 +20,9 @@ var LostItem = Backbone.Model.extend({
         return this.attributes.nearbyCompanies.fetch();
     },
 
-    sendEmail: function(subj, message) {
-        this.collection.url('item_status_change')
+    sendEmail: function(subj) {
+        var baseUrl = this.url();
+        $.post(baseUrl+"send_item_email/?email=item_status_change&email_subj="+encodeURIComponent(subj));
     }
 });
 

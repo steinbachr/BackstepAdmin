@@ -12,24 +12,28 @@ var LostItem = Backbone.Model.extend({
     initialize: function() {
         this.set({
             nearbyCompanies: new CompanyCollection([], {city: this.attributes.city}),
-            foundItems: new FoundItemCollection([], {
-                type: this.attributes.type,
-                color: this.attributes.color,
-                city: this.attributes.city.name
-            })
+            foundItems: [],
+            sourcingAttempts: []
         });
     },
 
+    /*
+    get additional details about a lost item
+    @param $foundContainer - the container to use for holding the FoundItems section
+     */
     getAdditionalDetails: function($foundContainer) {
-        this.attributes.foundItems.fetch({
-            success: function(collection, response, options) {
-                collection.forEach(function(item) {
-                    new FoundItemView({
-                        model: item,
-                        $container: $foundContainer
-                    }).render();
-                });
-            }
+        var _this = this;
+
+        this.attributes.foundItems.forEach(function(item) {
+            item.set({
+                sourcingAttempts: window.attempts.where({found_item: item.attributes.id, lost_item: _this.attributes.id})
+            });
+
+            new FoundItemView({
+                model: item,
+                el: $foundContainer,
+                lostItem: _this
+            }).render();
         });
     },
 

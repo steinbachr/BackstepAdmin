@@ -3,6 +3,9 @@ client = {
         window.lostItems = new LostItemCollection;
         window.cities = new CityCollection;
         window.statuses = new LostItemStatusCollection;
+        window.attempts = new LostItemAttemptCollection;
+
+        var attemptsDeferred = window.attempts.fetch();
 
         var itemTplDeferred = utils.fetchTemplate('item.html'),
             statusTplDeferred = utils.fetchTemplate('item_status.html'),
@@ -23,6 +26,33 @@ client = {
                         }).render();
 
                         view.$container.append(view.$el);
+
+                        /* get items close to the current item that have been found */
+                        var nearbyFoundItems = new FoundItemCollection([], {
+                            type: model.attributes.type,
+                            color: model.attributes.color,
+                            city: model.attributes.city.name
+                        });
+                        nearbyFoundItems.fetch({
+                            success: function(collection, response, options) {
+                               model.set({ foundItems: collection });
+                            }
+                        });
+
+                        /* get sourcing attempts for the current item */
+                        $.when(attemptsDeferred).then(function() {
+                            var itemAttempts = window.attempts.where({lost_item: model.attributes.id});
+                            itemAttempts.forEach(function(attempt) {
+                                var view = new AttemptView({
+                                    model: attempt
+                                });
+                                attempt.set({'view': view})
+                            });
+
+                            model.set({
+                                sourcingAttempts: itemAttempts
+                            });
+                        });
                     });
 
                     /* create the nav bar for filtering items by their location */

@@ -1,10 +1,7 @@
 var AttemptView = Backbone.View.extend({
-    events: {
-        'click .action-btn': 'createAttempt'
-    },
+    template: _.template("<div class='res <% if (success) { %>success<% } else if (success === undefined || success === null) { %>unknown<% } else { %>failure<% } %>'></div>"),
 
     render:  function() {
-        this.$el.html(this.template(this.model.attributes));
-        return this;
+        return this.template(this.model.attributes);
     }
 });

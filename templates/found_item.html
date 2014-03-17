@@ -11,4 +11,10 @@
     <td>
         <%= identifying_characteristics %>
     </td>
+    <td>
+        <% _.each(sourcingAttempts, function(att) { %><%= att.render() %><% }) %>
+    </td>
+    <td>
+        <div class='btn success sourcing-btn'>s</div><div class='btn unknown sourcing-btn'>i</div><div class='btn failure sourcing-btn'>f</div>
+    </td>
 </tr>

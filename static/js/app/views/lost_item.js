@@ -13,6 +13,9 @@ var LostItemsView = Backbone.View.extend({
         this.model.on('change', function() {
             _this.render();
         });
+        this.model.on('newSourcingAttempt', function() {
+            _this.render();
+        });
 
         this.$el.data('id', this.model.attributes.id);
         this.$el.draggable({

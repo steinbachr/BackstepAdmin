@@ -16,11 +16,6 @@ client = {
 
             window.lostItems.fetch({
                 success: function(collection, response, options) {
-                    /* filter out items that have a finder, we only want items reported lost here */
-                    collection.set(collection.models.filter(function(item) {
-                        return item.attributes.finder === null;
-                    }));
-
                     _.each(collection.models, function(model) {
                         var view = new LostItemsView({
                             model: model,

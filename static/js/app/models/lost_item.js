@@ -11,13 +11,26 @@ var LostItem = Backbone.Model.extend({
 
     initialize: function() {
         this.set({
-            nearbyCompanies: new CompanyCollection([], {city: this.city}),
-            nearbyItems: []
+            nearbyCompanies: new CompanyCollection([], {city: this.attributes.city}),
+            foundItems: new FoundItemCollection([], {
+                type: this.attributes.type,
+                color: this.attributes.color,
+                city: this.attributes.city.name
+            })
         });
     },
 
-    getDetails: function() {
-        return this.attributes.nearbyCompanies.fetch();
+    getAdditionalDetails: function($foundContainer) {
+        this.attributes.foundItems.fetch({
+            success: function(collection, response, options) {
+                collection.forEach(function(item) {
+                    new FoundItemView({
+                        model: item,
+                        $container: $foundContainer
+                    }).render();
+                });
+            }
+        });
     },
 
     sendEmail: function(subj) {

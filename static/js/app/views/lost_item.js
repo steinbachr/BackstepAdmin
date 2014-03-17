@@ -26,15 +26,13 @@ var LostItemsView = Backbone.View.extend({
     },
 
     itemDetails: function() {
-        var modelsDeferred = this.model.getDetails();
         var tplDeferred = utils.fetchTemplate('item_details.html');
-
         var _this = this;
-        $.when(modelsDeferred, tplDeferred).then(function(data, resp) {
+        $.when(tplDeferred).then(function(data, resp) {
             new LostItemDetailsView({
                 model: _this.model,
                 template: $.parseJSON(tplDeferred.responseText).template
-            }).render();
+            });
         });
 
         this.$el.siblings().removeClass('selected');
@@ -56,6 +54,9 @@ var LostItemDetailsView = Backbone.View.extend({
         this.template = _.template(options.template);
         this.$el = $('.popup');
         this.$overlay = $('.overlay');
+
+        this.render();
+        this.model.getAdditionalDetails(this.$el.find('.nearby-items tbody'));
     },
 
     events: {
@@ -69,7 +70,7 @@ var LostItemDetailsView = Backbone.View.extend({
     },
 
     expandSection: function(e) {
-        $(e.target).next().slideToggle();
+        $(e.target).next().slideDown();
     },
 
     actionRequired: function(e) {

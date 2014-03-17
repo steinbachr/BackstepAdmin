@@ -3,7 +3,7 @@ var express = require('express'),
     _ = require('underscore'),
     rest = require('restler'),
     url = require('url'),
-    subRenderer = require('./renderer.js'),
+    renderer = require('./renderer.js'),
     api = require('./api_urls.js');
     constants = require('./constants.js');
 
@@ -19,7 +19,7 @@ var app = express(),
 /*****-----< App Configurations >-----*****/
 app.engine('html', cons.underscore);
 app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/templates');
 app.use('/static', express.static('static'));
 app.use(express.json());
 app.use(express.bodyParser());
@@ -44,6 +44,6 @@ app.get('/fetch-template/', function(req, res) {
     var tpl = urlParts.query.template;
 
     res.send(JSON.stringify({
-        template: subRenderer.fetch(tpl)
+        template: renderer.fetch(tpl)
     }));
 });

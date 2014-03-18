@@ -21,7 +21,11 @@ var ItemStatusView = Backbone.View.extend({
 
                 _this.model.set({count: _this.model.attributes.count + 1});
                 deferred.done(function() {
-                    itemModel.sendEmail("Your Item's Status Has Changed!");
+                    if (statusKey === 2) {
+                        itemModel.sendEmail("potential_match_found", "A potential match has been found for your lost item!");
+                    } else {
+                        itemModel.sendEmail("item_status_change", "Your Item's Status Has Changed!");
+                    }
                 });
             }
         });

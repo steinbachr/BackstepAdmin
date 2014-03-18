@@ -37,9 +37,9 @@ var LostItem = Backbone.Model.extend({
         });
     },
 
-    sendEmail: function(subj) {
+    sendEmail: function(tpl, subj) {
         var baseUrl = this.url();
-        $.post(baseUrl+"send_item_email/?email=item_status_change&email_subj="+encodeURIComponent(subj));
+        $.post(baseUrl+"send_item_email/?email="+tpl+"&email_subj="+encodeURIComponent(subj));
     }
 });
 

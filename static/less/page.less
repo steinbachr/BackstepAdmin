@@ -17,6 +17,8 @@
 @vibrant-purple: #8226b7;
 @royal-purple: #440666;
 @yellow: #f9f190;
+@blue: #80caed;
+@darker-blue: #2e9fd3;
 @green: #88cea0;
 @red: #e24000;
 
@@ -60,15 +62,22 @@ a { color:@purple-link; }
 
 body { background:@dark-gray; .alegraya_family();
     .overlay { position:fixed; top:0; left:0; height:100%; width:100%; z-index:5; background:black; opacity: .7;}
-    h1 { .audiowide_family; .gigantic_font; text-align:center; color:@purple-white; }
-    .counter, .refresh { position:absolute; top:0; right:20px; color:@purple-white;
+    .counter, .refresh { position:absolute; top:10px; left:20px; color:@purple-white;
         span { font-size:30px; }
-        &.refresh { left:20px; top:20px; cursor:pointer;
-            span { padding-right:10px; }
+        &.refresh { left:110px; top:10px;
+            span { padding-left:10px; font-size:40px; }
         }
     }
-    .legend { position:absolute; top:40px; right:20px; color:white; }
-    .container { margin:30px auto 0px auto; width:99%;
+    .highlight-legend { position:absolute; top:20px; right:20px; color:white;
+        h4 { margin:0; border-bottom:solid 1px white; }
+        .legend-el { width:10px; height:10px; display:inline-block;
+            &.blue { background:@darker-blue; }
+        }
+    }
+    .legend { position:absolute; top:20px; right:250px; color:white;
+        h4 { margin:0; border-bottom:solid 1px white; }
+    }
+    .container { margin:100px auto 0px auto; width:99%;
         .locations-container {
             span.city { color:@purple-link; margin-right:10px; .smaller_font; cursor:pointer; display:inline-block;
                 &.selected { font-weight:bold;  .larger_font; }
@@ -98,6 +107,7 @@ body { background:@dark-gray; .alegraya_family();
                         div.result { border-bottom:solid 2px white; color:@purple-white; padding:15px; cursor:pointer; display:table-row;
                             &:hover { background:@darker-gray; }
                             &.selected { background:white; color:black; }
+                            &.recent { background:@darker-blue; }
                             .result-item { display:table-cell; }
                         }
                     }

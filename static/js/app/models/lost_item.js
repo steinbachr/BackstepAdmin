@@ -37,6 +37,18 @@ var LostItem = Backbone.Model.extend({
         });
     },
 
+    /*
+    check if the filed_datetime of this item is within the last day.
+    @return true if so, false otherwise
+     */
+    filedInPastDay: function() {
+        var filedDate = Date.parse(this.attributes.filed_datetime),
+            today = Date.now();
+        var elapsedTime = today - filedDate; // returns diff in milliseconds
+
+       return (elapsedTime / (1000 * 60 * 60)) <= 24;
+    },
+
     sendEmail: function(tpl, subj) {
         var baseUrl = this.url();
         $.post(baseUrl+"send_item_email/?email="+tpl+"&email_subj="+encodeURIComponent(subj));

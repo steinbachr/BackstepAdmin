@@ -34,12 +34,16 @@
 </head>
 <body>
     <div class="overlay" style="display:none;"></div>
-    <h1>Admin Console</h1>
-    <div class="refresh"><span class="iconic reload"></span>refresh</div>
+    <div class="refresh"><span class="iconic reload"></span></div>
     <div class="counter">
         <span class="total-items"><%= itemsCount %></span> items <br />
     </div>
+    <div class="highlight-legend">
+        <h4>Highlight Legend</h4>
+        <span class="legend-el blue"></span> = Item Reported In Last Day
+    </div>
     <div class="legend">
+        <h4>Flags Legend</h4>
         <span class="iconic target"></span> = Action Required By Loser <br />
         <span class="iconic pin"></span> = Has Nearby Found Items That Might Match
     </div>

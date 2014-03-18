@@ -22,6 +22,8 @@ var LostItemsView = Backbone.View.extend({
             appendTo: 'body',
             helper: "clone"
         });
+
+        this.model.filedInPastDay() && this.$el.addClass("recent");
     },
 
     events: {

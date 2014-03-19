@@ -15,6 +15,14 @@ var LostItem = Backbone.Model.extend({
             foundItems: [],
             sourcingAttempts: []
         });
+
+        this.on("change:status", function() {
+            if (this.attributes.status === 2) {
+                this.sendEmail("potential_match_found", "A potential match has been found for your lost item!");
+            } else {
+                this.sendEmail("item_status_change", "Your Item's Status Has Changed!");
+            }
+        });
     },
 
     /*

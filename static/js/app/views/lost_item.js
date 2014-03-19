@@ -62,6 +62,12 @@ var LostItemDetailsView = Backbone.View.extend({
 
         this.render();
         this.model.getAdditionalDetails(this.$el.find('.nearby-items tbody'));
+
+        var _this = this;
+        this.model.on('newSourcingAttempt', function() {
+            /* if the models status is 2, then a match was found for the item, so hide the item info box */
+            this.attributes.status === 2 && _this.hide();
+        });
     },
 
     events: {

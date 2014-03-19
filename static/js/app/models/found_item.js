@@ -1,4 +1,11 @@
-var FoundItem = Backbone.Model.extend({});
+var FoundItem = Backbone.Model.extend({
+    url: function() {
+        if (this.isNew()) {
+            return this.collection.baseUrl;
+        }
+        return this.collection.baseUrl + "/" + this.id + "/";
+    }
+});
 
 var FoundItemCollection = Backbone.Collection.extend({
     model: FoundItem,

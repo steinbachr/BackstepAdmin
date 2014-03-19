@@ -26,6 +26,14 @@ var FoundItemView = Backbone.View.extend({
             }
         }());
 
+        /* if the sourcing attempt was a success, then move the item into the match found stage and set is_matched=true
+         * for the found item
+        */
+        if (successVal) {
+            this.currentLostItem.save({status: 2}, {patch: true});
+            this.model.save({is_matched: 'True'}, {patch: true});
+        }
+
         var newAttempt = {
             lost_item: this.currentLostItem.attributes.id,
             found_item: this.model.attributes.id,
@@ -38,10 +46,11 @@ var FoundItemView = Backbone.View.extend({
                 model: newAttemptObj
             })
         });
+
         this.model.attributes.sourcingAttempts.push(newAttemptObj);
         this.currentLostItem.attributes.sourcingAttempts.push(newAttemptObj);
-
         this.currentLostItem.trigger('newSourcingAttempt');
+
         this.render();
     },
 

@@ -31,7 +31,8 @@ client = {
                         var nearbyFoundItems = new FoundItemCollection([], {
                             type: model.attributes.type,
                             color: model.attributes.color,
-                            city: model.attributes.city.name
+                            city: model.attributes.city.name,
+                            is_matched: 'False'
                         });
                         nearbyFoundItems.fetch({
                             success: function(collection, response, options) {
